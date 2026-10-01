@@ -13,18 +13,9 @@ from pygame import font
 from settings import *
 
 def display_game_screen(screen: pygame.Surface) -> str:
-
-    # create clock
-    clock: pygame.time.Clock = pygame.time.Clock()
-    BG_color: tuple = (100,255,100)
-    Top_border: pygame.Rect = pygame.Rect(SCREEN_WIDTH, SCREEN_HEIGHT)
-    screen.fill(BG_color)
-
-        # render the screen
-    pygame.display.flip()
-        # advance the clock
-    clock.tick(FPS)
-    pygame.event.pump()
+    screen.fill("Green")
+    image: pygame.Surface = pygame.image.load("assets/grid_image.jpg")
+    screen.blit(image, (0, 0))
 
     # stay on the current screen
     return "PLAYING"
