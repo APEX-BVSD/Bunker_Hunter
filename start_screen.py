@@ -23,12 +23,16 @@ def display_start_screen(screen: pygame.Surface) -> str:
     
     """
     
-    # draw the screen        
-    screen.fill("black")
+    # draw the screen
+    image: pygame.Surface = pygame.image.load("assets/Space-Background-Image.jpg")
+    screen.blit(image, (0, 0))
 
     font: pygame.font.Font = pygame.font.Font(size=48)
+    bigger_font: pygame.font.Font = pygame.font.Font(size=100)
     text_box: pygame.Surface = font.render("Press SPACE to start.", True, "white")
     screen.blit(text_box, (screen.get_width() // 2 - text_box.get_width() // 2, screen.get_height() // 2))
+    text_box2: pygame.Surface = bigger_font.render("Bunker Hunters!", True, "white")
+    screen.blit(text_box2, (screen.get_width() // 2 - text_box2.get_width() // 2, screen.get_height() // 3))
 
 
     # process the events, if the space button was pressed, move to the next screen
