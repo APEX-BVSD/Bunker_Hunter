@@ -8,10 +8,13 @@ Kaplan Tonelli
 
 import asyncio
 import pygame
+import random
 from settings import *
 from start_screen import *
 from game_screen import *
+from equations import *
 
+random.randint(1,9)
 async def main() -> None:
 
     Background_color: tuple = (100,255,100)
@@ -55,6 +58,8 @@ async def main() -> None:
 
     # when the loop breaks, shut down pygame gracefully
     pygame.quit()
+
+
 
 
 asyncio.run(main())
