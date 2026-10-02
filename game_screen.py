@@ -11,6 +11,7 @@ from start_screen import *
 import pygame
 from pygame import font
 from settings import *
+from equations import *
 
 def display_game_screen(screen: pygame.Surface) -> str:
     screen.fill("Green")
@@ -21,7 +22,7 @@ def display_game_screen(screen: pygame.Surface) -> str:
     # stay on the current screen
     return "PLAYING"
 
-def mouse_grid_interactions() -> None:
+def mouse_grid_interactions() :
     for event in pygame.event.get():
 
 
@@ -31,7 +32,7 @@ def mouse_grid_interactions() -> None:
             print(event.pos)
         
             coord: tuple = (event.pos[0] // 80) + 1,(event.pos[1] // 80) + 1
-            print(coord)
+            problem(coord)
 
     
 

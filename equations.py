@@ -8,33 +8,28 @@ First Last
 
 import random
 
-def problem() -> None:   
-    y: int = int(input())
-    x: int = int(input()) 
+
+def problem(coord: tuple) -> None:   
+    x = int(coord[0])
+    y = int(coord[1])
 
 
     # making adding and subtraction equation for Y
-    second_number: int = random.randint(1, 10)
+    first_number: int = random.randint(y+10, 20)
     positive_negative: int = random.choice(["+", "-"])
-    second_number: int
+
 
     if positive_negative == "+":
-     first_number: int = y - second_number
+     second_number: int = y - first_number
     else:
-        first_number: int = second_number - y
+       second_number: int = y + first_number
 
-    wrong_right_one: int =  random.randint(1, 10)
-    wrong_right_two: int = random.randint(1, 10) 
+    wrong_right_one: int =  random.randint(1, y)
+    wrong_right_two: int = random.randint(1, y) 
 
-    equation_one: str = f"{second_number} {positive_negative} {first_number} = " 
-    equations_two: str = f"{second_number} {positive_negative} {wrong_right_one} = " 
-    equations_three: str = f"{second_number} {positive_negative} {wrong_right_two} = " 
-
-    if second_number - positive_negative and positive_negative < 0:
-        equation_one = second_number + positive_negative and positive_negative *-1
-        equation_two = second_number + positive_negative and positive_negative *-1
-        equation_three = second_number + positive_negative and positive_negative *-1
-
+    equation_one: str = f"{first_number} {positive_negative} {second_number} = " 
+    equations_two: str = f"{first_number} {positive_negative} {wrong_right_one} = " 
+    equations_three: str = f"{first_number} {positive_negative} {wrong_right_two} = " 
 
     print(f"{equation_one} \
             {equations_two} \
@@ -43,31 +38,25 @@ def problem() -> None:
 
 
     # making adding and subtraction equation for x
-    second_number: int = random.randint(1, 10)
+    second_number: int = random.randint(1, x)
     positive_negative: int = random.choice(["+", "-"])
-    second_number: int
 
     if positive_negative == "+":
         first_number: int = x - second_number
     else:
         first_number: int = second_number - x
 
-    wrong_right_one: int =  random.randint(1, 10)
-    wrong_right_two: int = random.randint(1, 10) 
+    wrong_right_one: int =  random.randint(1, x)
+    wrong_right_two: int = random.randint(1, x) 
 
-    equation_one: str = f"{second_number} {positive_negative} {first_number} = " 
-    equations_two: str = f"{second_number} {positive_negative} {wrong_right_one} = " 
-    equations_three: str = f"{second_number} {positive_negative} {wrong_right_two} = " 
-
-    if second_number - positive_negative and positive_negative < 0:
-        equation_one_x = second_number + positive_negative and positive_negative *-1
-        equation_two_x = second_number + positive_negative and positive_negative *-1
-        equation_three_x = second_number + positive_negative and positive_negative *-1
+    equation_one_x: str = f"{first_number} {positive_negative} {second_number} = " 
+    equations_two_x: str = f"{first_number} {positive_negative} {wrong_right_one} = " 
+    equations_three_x: str = f"{first_number} {positive_negative} {wrong_right_two} = " 
 
 
     print(f"{equation_one_x} \
-            {equation_two_x} \
-            {equation_three_x}")
+            {equations_two_x} \
+            {equations_three_x}")
         
 
 
