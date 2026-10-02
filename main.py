@@ -1,18 +1,23 @@
 """
 Describe your game.
-Month Year
-First Last
-First Last 
-First Last 
+October 2026
+Yoav Bierkatz
+Jude Averitt
+Kaplan Tonelli
 """
 
 import asyncio
 import pygame
+import random
 from settings import *
 from start_screen import *
+from game_screen import *
+from equations import *
 
+random.randint(1,9)
 async def main() -> None:
 
+    Background_color: tuple = (100,255,100)
     pygame.init()
 
     # set the screen dimensions
@@ -33,7 +38,8 @@ async def main() -> None:
             game_state = display_start_screen(screen)
 
         elif game_state == "PLAYING":
-            pass
+            print("hamburger")
+            game_state = display_game_screen(screen)
 
         elif game_state == "GAME_OVER":
             pass
@@ -41,8 +47,6 @@ async def main() -> None:
         else:
             print(f"Invalid game state: {game_state}")
             running = False
-
-
         
         # render the screen
         pygame.display.flip()
@@ -54,6 +58,8 @@ async def main() -> None:
 
     # when the loop breaks, shut down pygame gracefully
     pygame.quit()
+
+
 
 
 asyncio.run(main())
