@@ -35,9 +35,9 @@ async def main() -> None:
             game_state = display_start_screen(screen)
 
         elif game_state == "PLAYING":
-            print("hamburger")
             game_state = display_game_screen(screen)
-
+            mouse_grid_interactions()
+            
         elif game_state == "GAME_OVER":
             pass
 
