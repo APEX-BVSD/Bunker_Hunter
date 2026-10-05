@@ -12,6 +12,7 @@ import random
 from settings import *
 from start_screen import *
 from game_screen import *
+from mode_screen import *
 from equations import *
 
 random.randint(1,9)
@@ -36,6 +37,9 @@ async def main() -> None:
     while running:
         if game_state == "START_SCREEN":
             game_state = display_start_screen(screen)
+
+        elif game_state == "MODE_SCREEN":
+            game_state = display_mode_screen(screen)
 
         elif game_state == "PLAYING":
             game_state = display_game_screen(screen)
