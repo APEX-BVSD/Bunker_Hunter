@@ -13,12 +13,15 @@ from pygame import font
 from settings import *
 from equations import *
 
-def display_game_screen(screen: pygame.Surface) -> str:
+def display_game_screen(screen: pygame.Surface,background_image: pygame.surface, heart_sprite: list[pygame.Surface], frame_counter: int) -> str:
     screen.fill("Green")
-    original_image: pygame.Surface = pygame.image.load("assets/grid_image.jpg")
-    bigger_image: pygame.Surface = pygame.transform.scale(original_image, (800,800))
-    screen.blit(bigger_image, (0, 0))
-    
+    screen.blit(background_image, (0, 0))
+    #hearts
+    heart_frame: int = (frame_counter // FPS) % len(heart_sprite)
+    screen.blit(heart_sprite[heart_frame],(0,0))
+    screen.blit(heart_sprite[heart_frame],(35,0))
+    screen.blit(heart_sprite[heart_frame],(67,0))
+
     # stay on the current screen
     return "PLAYING"
 
@@ -53,6 +56,7 @@ def mouse_grid_interactions() :
             
             #problem(coord)
             print(coord)
+
 
     
 

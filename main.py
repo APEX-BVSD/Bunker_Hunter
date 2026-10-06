@@ -29,7 +29,14 @@ async def main() -> None:
 
     # create clock
     clock: pygame.time.Clock = pygame.time.Clock()
+    frame_counter: int = 0
 
+    #Load background image for playing screen
+    original_image: pygame.Surface = pygame.image.load("assets/grid_image.jpg")
+    bigger_image: pygame.Surface = pygame.transform.scale(original_image, (800,800))
+
+    # load hearts
+    heart_sprite: list[pygame.Surface] = load_sprites("Heart_Idle", 4)
 
     # MAIN GAME LOOP
     running: bool = True
@@ -42,7 +49,7 @@ async def main() -> None:
             game_state = display_mode_screen(screen)
 
         elif game_state == "PLAYING":
-            game_state = display_game_screen(screen)
+            game_state = display_game_screen(screen,bigger_image, heart_sprite, frame_counter)
             mouse_grid_interactions()
             
         elif game_state == "GAME_OVER":
@@ -56,6 +63,7 @@ async def main() -> None:
         pygame.display.flip()
         # advance the clock
         clock.tick(FPS)
+        frame_counter += 1
         pygame.event.pump()
 
         await asyncio.sleep(0)
@@ -64,6 +72,14 @@ async def main() -> None:
     pygame.quit()
 
 
+def load_sprites(file_name: str, sprite_count: int) -> list[pygame.Surface]:
+    sprite_list: list[pygame.Surface] = []
+
+    for i in range(sprite_count):
+        sprite: pygame.Surface = pygame.image.load(f"assets/{file_name}{i}.png")
+        sprite_list.append(sprite)
+
+    return sprite_list
 
 
 asyncio.run(main())
