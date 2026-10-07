@@ -32,8 +32,8 @@ async def main() -> None:
     frame_counter: int = 0
 
     #Load background image for playing screen
-    original_image: pygame.Surface = pygame.image.load("assets/grid_image.jpg")
-    bigger_image: pygame.Surface = pygame.transform.scale(original_image, (800,800))
+    original_image: pygame.Surface = pygame.image.load("assets/Desert.png")
+    bigger_image: pygame.Surface = pygame.transform.scale(original_image, (800,1000))
 
     # load hearts
     heart_sprite: list[pygame.Surface] = load_sprites("Heart_Idle", 4)
