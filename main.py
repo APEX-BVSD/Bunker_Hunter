@@ -11,9 +11,10 @@ import pygame
 import random
 from settings import *
 from start_screen import *
-from game_screen import *
+from grid_screen import *
 from mode_screen import *
 from equations import *
+from problem_screen import *
 
 random.randint(1,9)
 async def main() -> None:
@@ -49,9 +50,17 @@ async def main() -> None:
             game_state = display_mode_screen(screen)
 
         elif game_state == "PLAYING":
-            game_state = display_game_screen(screen,bigger_image, heart_sprite, frame_counter)
-            mouse_grid_interactions()
-            
+            game_state = display_grid_screen(screen,bigger_image, heart_sprite, frame_counter)
+            coord: tuple = get_coordinates()
+            if coord is not None:
+                game_state = "LOAD_QUESTION_SCREEN"
+
+        elif game_state == "LOAD_QUESTION_SCREEN": 
+            game_state = display_question_screen(screen, coord)
+
+        elif game_state == "QUESTION_SCREEN":
+            pass
+
         elif game_state == "GAME_OVER":
             pass
 

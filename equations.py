@@ -8,8 +8,24 @@ First Last
 from settings import *
 import random
 
+def get_equation_set(coord: tuple) -> list[list[str]]:
+    return [
+        # x problems
+        [
+            make_equation(coord[0], make_correct = True),
+            make_equation(coord[0], make_correct = False),
+            make_equation(coord[0], make_correct = False)
 
-def problem(correct_answer: int, make_correct: bool = True) -> str:   
+        ],
+        # y problems
+        [ 
+            make_equation(coord[1], make_correct = True),
+            make_equation(coord[1], make_correct = False),
+            make_equation(coord[1], make_correct = False)
+        ]
+    ]
+
+def make_equation(correct_answer: int, make_correct: bool = True) -> str:   
     """
     What is does
     Parameters
