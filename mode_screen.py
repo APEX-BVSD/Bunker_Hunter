@@ -29,19 +29,16 @@ def display_mode_screen(screen: pygame.Surface) -> str:
     bigger_font: pygame.font.Font = pygame.font.Font(size=100)
     text_box1: pygame.Surface = bigger_font.render("MODES", True, "white")
     text_box2: pygame.Surface = font.render("MODE 1 (+,-)", True, "white")
-    text_box3: pygame.Surface = font.render("MODE 2 (*,/)", True, "white")
-    text_box4: pygame.Surface = font.render("MODE 3 (Algebra)", True, "white")
-
+    Mode_Button:pygame.Rect= pygame.Rect(screen.get_width() // 2 - text_box2.get_width() // 2, screen.get_height() // 4, 200, 30)
     screen.blit(image, (0, 0))
     screen.blit(text_box1, (screen.get_width() // 2 - text_box1.get_width() // 2, screen.get_height() // 10))
     screen.blit(text_box2, (screen.get_width() // 2 - text_box2.get_width() // 2, screen.get_height() // 4))
-    screen.blit(text_box3, (screen.get_width() // 2 - text_box3.get_width() // 2, screen.get_height() // 3+40))
-    screen.blit(text_box4, (screen.get_width() // 2 - text_box4.get_width() // 2, screen.get_height() // 2))
+    
 
 
     # process the events, if the space button was pressed, move to the next screen
     for event in pygame.event.get():
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and Mode_Button.collidepoint(event.pos):
                 return "PLAYING"
 
     # stay on the current screen
