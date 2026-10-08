@@ -8,7 +8,7 @@ First Last
 
 
 SCREEN_WIDTH: int = 800
-SCREEN_HEIGHT: int = 800
+SCREEN_HEIGHT: int = 900
 GRID_ROWS: int = 10
 GRID_COLUMNS: int = 10
 

@@ -24,7 +24,7 @@ def display_mode_screen(screen: pygame.Surface) -> str:
     """
     
     # draw the screen
-    image: pygame.Surface = pygame.image.load("assets/Space-Background-Image.jpg")
+    image: pygame.Surface = pygame.image.load("assets/main-screen.png")
     font: pygame.font.Font = pygame.font.Font(size=48)
     bigger_font: pygame.font.Font = pygame.font.Font(size=100)
     text_box1: pygame.Surface = bigger_font.render("MODES", True, "white")
