@@ -3,7 +3,7 @@ from pygame import font
 from equations import*
 
 def display_question_screen(screen: pygame.Surface, coord: tuple) -> str:
-    image: pygame.Surface = pygame.image.load("assets/Space-Background-Image.jpg")
+    image: pygame.Surface = pygame.image.load("assets/main-screen.png")
     screen.blit(image, (0, 0))
     font: pygame.font.Font = pygame.font.Font(size=48)
     bigger_font: pygame.font.Font = pygame.font.Font(size=90)
