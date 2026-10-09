@@ -31,10 +31,10 @@ def get_coordinates() -> tuple:
 
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             mouse_x, mouse_y = event.pos
-        
-            coord: tuple = (event.pos[0] // (SCREEN_WIDTH//GRID_ROWS)) + 1,(event.pos[1] // (SCREEN_HEIGHT//GRID_COLUMNS)) + 1
-            # get problems for x coordinate and shuffle
-            return coord
+            if mouse_x <= 800 and mouse_y <= 800:
+                coord: tuple = (mouse_x // (SCREEN_WIDTH//GRID_ROWS)) + 1,(mouse_y // (SCREEN_HEIGHT//GRID_COLUMNS)) + 1
+                # get problems for x coordinate and shuffle
+                return coord
 
 
 
