@@ -16,7 +16,7 @@ from mode_screen import *
 from equations import *
 from problem_screen import *
 
-random.randint(1,9)
+
 async def main() -> None:
 
     Background_color: tuple = (100,255,100)
@@ -54,13 +54,12 @@ async def main() -> None:
             game_state = display_grid_screen(screen,bigger_image, heart_sprite, frame_counter)
             coord: tuple = get_coordinates()
             if coord is not None:
-                game_state = "LOAD_QUESTION_SCREEN"
-
-        elif game_state == "LOAD_QUESTION_SCREEN": 
-            game_state = display_question_screen(screen, coord)
+                game_state = "QUESTION_SCREEN"
+                equations: dict = get_equation_set(coord)
 
         elif game_state == "QUESTION_SCREEN":
-            pass
+            
+            game_state = display_question_screen(screen, equations, coord)
 
         elif game_state == "GAME_OVER":
             pass
