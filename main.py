@@ -1,5 +1,5 @@
 """
-Describe your game.
+Bucket Hunters is a game where you solve math equations to eliminate all the buckets of aliens.
 October 2026
 Yoav Bierkatz
 Jude Averitt
@@ -19,12 +19,19 @@ from Intro_screen import *
 
 
 async def main() -> None:
+    """
+    Run the main game loop, managing game states and rendering. Displays screens and problems.
+    
+    Returns:
+        None
+    """
 
-    Background_color: tuple = (100,255,100)
+
+    background_color: tuple = (100, 255, 100)
     pygame.init()
 
     # set the screen dimensions
-    screen: pygame.Surface = pygame.display.set_mode( (SCREEN_WIDTH, SCREEN_HEIGHT) )
+    screen: pygame.Surface = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
     # set title
     pygame.display.set_caption(GAME_TITLE)
@@ -34,9 +41,10 @@ async def main() -> None:
     frame_counter: int = 0
 
 
-    #Load background image for playing screen
+    # Load background image for playing screen
     original_image: pygame.Surface = pygame.image.load("assets/Desert.png")
-    bigger_image: pygame.Surface = pygame.transform.scale(original_image, (800,1000))
+    bigger_image: pygame.Surface = pygame.transform.scale(original_image, (800, 1000))
+
 
     # load hearts
     heart_sprite: list[pygame.Surface] = load_sprites("Heart_Idle", 4)
@@ -55,7 +63,7 @@ async def main() -> None:
             game_state = display_mode_screen(screen)
 
         elif game_state == "PLAYING":
-            game_state = display_grid_screen(screen,bigger_image, heart_sprite, frame_counter)
+            game_state = display_grid_screen(screen, bigger_image, heart_sprite, frame_counter)
             coord: tuple = get_coordinates()
             if coord is not None:
                 game_state = "QUESTION_SCREEN"
@@ -86,6 +94,17 @@ async def main() -> None:
 
 
 def load_sprites(file_name: str, sprite_count: int) -> list[pygame.Surface]:
+    """
+    Load a series of sprite images from the assets folder.
+    
+    Parameters:
+        file_name: The base name of the sprite files (without number suffix)
+        sprite_count: The number of sprite images to load
+        
+    Returns:
+        A list of pygame Surface objects containing the loaded sprites
+    """
+    
     sprite_list: list[pygame.Surface] = []
 
     for i in range(sprite_count):
