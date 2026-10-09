@@ -32,6 +32,7 @@ async def main() -> None:
     clock: pygame.time.Clock = pygame.time.Clock()
     frame_counter: int = 0
 
+
     #Load background image for playing screen
     original_image: pygame.Surface = pygame.image.load("assets/Desert.png")
     bigger_image: pygame.Surface = pygame.transform.scale(original_image, (800,1000))

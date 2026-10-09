@@ -24,7 +24,7 @@ def display_start_screen(screen: pygame.Surface) -> str:
     """
     
     # draw the screen
-    image: pygame.Surface = pygame.image.load("assets/Space-Background-Image.jpg")
+    image: pygame.Surface = pygame.image.load("assets/main-screen.png")
     screen.blit(image, (0, 0))
 
     font: pygame.font.Font = pygame.font.Font(size=48)
