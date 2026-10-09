@@ -17,6 +17,7 @@ from equations import *
 from problem_screen import *
 from Intro_screen import *
 
+
 async def main() -> None:
 
     Background_color: tuple = (100,255,100)
