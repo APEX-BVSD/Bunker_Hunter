@@ -8,22 +8,30 @@ First Last
 from settings import *
 import random
 
-def get_equation_set(coord: tuple) -> list[list[str]]:
-    return [
-        # x problems
-        [
-            make_equation(coord[0], make_correct = True),
-            make_equation(coord[0], make_correct = False),
-            make_equation(coord[0], make_correct = False)
-
-        ],
-        # y problems
-        [ 
-            make_equation(coord[1], make_correct = True),
-            make_equation(coord[1], make_correct = False),
-            make_equation(coord[1], make_correct = False)
-        ]
+def get_equation_set(coord: tuple) -> dict:
+    correct_x: str = make_equation(coord[0], make_correct = True)
+    equations_x: list[str] = [
+                correct_x,
+                make_equation(coord[0], make_correct = False),
+                make_equation(coord[0], make_correct = False)
     ]
+    random.shuffle(equations_x)
+
+
+    correct_y: str = make_equation(coord[1], make_correct = True),
+    equations_y: list[str] = [
+                correct_y,
+                make_equation(coord[1], make_correct = False),
+                make_equation(coord[1], make_correct = False)
+    ]
+    random.shuffle(equations_y)
+
+    return {
+        "correct_x" : correct_x,
+        "equations_x" : equations_x,
+        "correct_y" : correct_y,
+        "equations_y" : equations_y
+    }
 
 def make_equation(correct_answer: int, make_correct: bool = True) -> str:   
     """
@@ -33,7 +41,7 @@ def make_equation(correct_answer: int, make_correct: bool = True) -> str:
     make_correct(bool): Describe
     
     Returns:
-    str: Descirbe
+    str: Describe
     """
 
     operation: str = random.choice(["-","-"])
@@ -71,7 +79,7 @@ def make_equation(correct_answer: int, make_correct: bool = True) -> str:
             while second_number == exception: 
                 second_number: int = random.randint(low, high)     
 
-    return f"{first_number} {operation} {second_number}"
+    return f"{first_number} {operation} {second_number} = ?"
 
 
 
