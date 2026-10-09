@@ -15,6 +15,7 @@ from grid_screen import *
 from mode_screen import *
 from equations import *
 from problem_screen import *
+from Intro_screen import *
 
 
 async def main() -> None:
@@ -46,6 +47,9 @@ async def main() -> None:
     while running:
         if game_state == "START_SCREEN":
             game_state = display_start_screen(screen)
+        
+        elif game_state == "INTRO_SCREEN":
+            game_state = display_info_screen(screen)
 
         elif game_state == "MODE_SCREEN":
             game_state = display_mode_screen(screen)
