@@ -18,3 +18,7 @@ HIGH: int = 20
 FPS: int = 60
 
 GAME_TITLE: str = "Your Game Title"
+
+HEART1POS: tuple = (0,0)
+HEART2POS: tuple = (35,0)
+HEART3POS: tuple = (67,0)

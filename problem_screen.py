@@ -1,8 +1,10 @@
 import pygame
 from pygame import font
-from equations import*
+from equations import *
+from settings import *
 
-def display_question_screen(screen: pygame.Surface, equations: dict, coord: tuple) -> str:
+
+def display_question_screen(screen: pygame.Surface, equations: dict, coord: tuple, heart_sprite: list[pygame.Surface],heart_gone: list[pygame.Surface], frame_counter: int,lives:list[bool]) -> str:
     image: pygame.Surface = pygame.image.load("assets/main-screen.png")
     screen.blit(image, (0, 0))
     font: pygame.font.Font = pygame.font.Font(size=48)
@@ -11,6 +13,7 @@ def display_question_screen(screen: pygame.Surface, equations: dict, coord: tupl
     equations_x: list[str] = equations["equations_x"]
     correct_y: str = equations["correct_y"]
     equations_y: list[str] = equations["equations_y"]
+    
 
     asking_text_box_x: pygame.Surface = bigger_font.render(f"Which equation equals {coord[0]} ?", True, "white")
 
@@ -45,18 +48,54 @@ def display_question_screen(screen: pygame.Surface, equations: dict, coord: tupl
                     print("Correct!")
                 else:
                     print("Wrong!")
+                    if lives[0]:
+                        lives[0]=False
+                    elif lives[1]:
+                        lives[1]=False
+                    elif lives[2]:
+                        lives[2]=False
+                    
             elif equation_2_x_box.collidepoint(event.pos):
                 if equations_x[1] == correct_x:
                     print("Correct!")
                 else:
                     print("Wrong!")
+                    if lives[0]:
+                        lives[0]=False
+                    elif lives[1]:
+                        lives[1]=False
+                    elif lives[2]:
+                        lives[2]=False
             elif equation_3_x_box.collidepoint(event.pos):
                 if equations_x[2] == correct_x:
                     print("Correct!")
                 else:
                     print("Wrong!")
+                    if lives[0]:
+                        lives[0]=False
+                    elif lives[1]:
+                        lives[1]=False
+                    elif lives[2]:
+                        lives[2]=False
             else:
                 print("Not clicking an equation!")
+    heart_frame: int = (frame_counter // FPS) % len(heart_sprite)
+    heart_death: int = (frame_counter // FPS) % len(heart_gone)
+    if lives[2]==True:
+        screen.blit(heart_sprite[heart_frame],HEART1POS)
+    else: 
+        screen.blit(heart_gone[-1],HEART1POS)
+    if lives[1]==True:
+        screen.blit(heart_sprite[heart_frame],HEART2POS)
+    else: 
+        screen.blit(heart_gone[-1],HEART2POS)
+    if lives[0]==True:
+        screen.blit(heart_sprite[heart_frame],HEART3POS)
+    else: 
+        screen.blit(heart_gone[-1],HEART3POS)
+
+
+
 
 
     """

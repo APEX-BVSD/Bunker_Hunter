@@ -39,7 +39,9 @@ async def main() -> None:
     bigger_image: pygame.Surface = pygame.transform.scale(original_image, (800,1000))
 
     # load hearts
+    heart_gone: list[pygame.Surface] = load_sprites("Heart_gone", 12)
     heart_sprite: list[pygame.Surface] = load_sprites("Heart_Idle", 4)
+    lives: list[bool] = [True, True, True]
 
     # MAIN GAME LOOP
     running: bool = True
@@ -55,7 +57,7 @@ async def main() -> None:
             game_state = display_mode_screen(screen)
 
         elif game_state == "PLAYING":
-            game_state = display_grid_screen(screen,bigger_image, heart_sprite, frame_counter)
+            game_state = display_grid_screen(screen,bigger_image, heart_sprite, frame_counter, lives)
             coord: tuple = get_coordinates()
             if coord is not None:
                 game_state = "QUESTION_SCREEN"
@@ -63,7 +65,7 @@ async def main() -> None:
 
         elif game_state == "QUESTION_SCREEN":
             
-            game_state = display_question_screen(screen, equations, coord)
+            game_state = display_question_screen(screen, equations, coord, heart_sprite, heart_gone, frame_counter,lives)
 
         elif game_state == "GAME_OVER":
             pass
