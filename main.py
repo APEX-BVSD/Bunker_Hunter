@@ -16,6 +16,7 @@ from mode_screen import *
 from equations import *
 from problem_screen import *
 from Intro_screen import *
+from game_over_screen import *
 
 
 async def main() -> None:
@@ -74,7 +75,7 @@ async def main() -> None:
             game_state = display_question_screen(screen, equations, coord)
 
         elif game_state == "GAME_OVER":
-            pass
+            game_state = display_game_over_screen(screen)
 
         else:
             print(f"Invalid game state: {game_state}")
