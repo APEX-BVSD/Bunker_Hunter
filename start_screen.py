@@ -1,9 +1,9 @@
 """
-Contains functions that implement the start screen.
-Month Year
-First Last
-First Last 
-First Last 
+Displays the start screen for Bunker Hunters game.
+October 2026
+Yoav Bierkatz
+Jude Averitt
+Kaplan Tonelli
 """
 
 
@@ -16,11 +16,11 @@ def display_start_screen(screen: pygame.Surface) -> str:
     Returns "PLAYING" as the next game state.
 
     Parameters:
-    screen(pygame.Surface): The screen to render the game on
+        screen: The screen to render the game on
     
     Returns:
-    str: The game state the game should use in the next frame
-    
+        The game state the game should use in the next frame
+
     """
     
     # draw the screen
@@ -31,14 +31,15 @@ def display_start_screen(screen: pygame.Surface) -> str:
     bigger_font: pygame.font.Font = pygame.font.Font(size=100)
     text_box: pygame.Surface = font.render("Press SPACE to start.", True, "white")
     screen.blit(text_box, (screen.get_width() // 2 - text_box.get_width() // 2, screen.get_height() // 2))
-    text_box2: pygame.Surface = bigger_font.render("Bunker Hunters!", True, "white")
+    text_box2: pygame.Surface = bigger_font.render("Bunker Hunters", True, "white")
     screen.blit(text_box2, (screen.get_width() // 2 - text_box2.get_width() // 2, screen.get_height() // 3))
 
 
     # process the events, if the space button was pressed, move to the next screen
     for event in pygame.event.get():
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
-                return "INTRO_SCREEN"
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+            return "INTRO_SCREEN"
+
 
     # stay on the current screen
     return "START_SCREEN"

@@ -11,7 +11,7 @@ SCREEN_WIDTH: int = 800
 SCREEN_HEIGHT: int = 900
 GRID_ROWS: int = 10
 GRID_COLUMNS: int = 10
-
+EQUATION_RECT_DIMENSIONS: tuple = (200,40)
 LOW: int = -20
 HIGH: int = 20
 

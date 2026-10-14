@@ -8,29 +8,19 @@ First Last
 from settings import *
 import random
 
-def get_equation_set(coord: tuple) -> dict:
-    correct_x: str = make_equation(coord[0], make_correct = True)
-    equations_x: list[str] = [
-                correct_x,
-                make_equation(coord[0], make_correct = False),
-                make_equation(coord[0], make_correct = False)
+def get_equation_set(coord: int) -> dict:
+    correct: str = make_equation(coord, make_correct = True)
+    equations: list[str] = [
+                correct,
+                make_equation(coord, make_correct = False),
+                make_equation(coord, make_correct = False)
     ]
-    random.shuffle(equations_x)
-
-
-    correct_y: str = make_equation(coord[1], make_correct = True),
-    equations_y: list[str] = [
-                correct_y,
-                make_equation(coord[1], make_correct = False),
-                make_equation(coord[1], make_correct = False)
-    ]
-    random.shuffle(equations_y)
+    random.shuffle(equations)
 
     return {
-        "correct_x" : correct_x,
-        "equations_x" : equations_x,
-        "correct_y" : correct_y,
-        "equations_y" : equations_y
+        "correct" : correct,
+        "equations" : equations,
+        "coord" : coord
     }
 
 def make_equation(correct_answer: int, make_correct: bool = True) -> str:   
