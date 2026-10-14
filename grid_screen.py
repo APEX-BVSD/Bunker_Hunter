@@ -14,7 +14,7 @@ from settings import *
 from problem_screen import *
 from equations import *
 
-def display_grid_screen(screen: pygame.Surface,background_image: pygame.surface, heart_sprite: list[pygame.Surface], frame_counter: int) -> str:
+def display_grid_screen(screen: pygame.Surface,background_image: pygame.surface, heart_sprite: list[pygame.Surface], frame_counter: int,lives:list[bool]) -> str:
     screen.blit(background_image, (0, 0))
     #hearts
     heart_frame: int = (frame_counter // FPS) % len(heart_sprite)

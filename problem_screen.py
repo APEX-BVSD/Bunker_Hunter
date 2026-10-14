@@ -43,6 +43,59 @@ def display_question_screen(screen: pygame.Surface, equations: dict) -> bool:
     
     for event in pygame.event.get():
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            if equation_1_x_box.collidepoint(event.pos):
+                if equations_x[0] == correct_x:
+                    print("Correct!")
+                else:
+                    print("Wrong!")
+                    if lives[0]:
+                        lives[0]=False
+                    elif lives[1]:
+                        lives[1]=False
+                    elif lives[2]:
+                        lives[2]=False
+                    
+            elif equation_2_x_box.collidepoint(event.pos):
+                if equations_x[1] == correct_x:
+                    print("Correct!")
+                else:
+                    print("Wrong!")
+                    if lives[0]:
+                        lives[0]=False
+                    elif lives[1]:
+                        lives[1]=False
+                    elif lives[2]:
+                        lives[2]=False
+            elif equation_3_x_box.collidepoint(event.pos):
+                if equations_x[2] == correct_x:
+                    print("Correct!")
+                else:
+                    print("Wrong!")
+                    if lives[0]:
+                        lives[0]=False
+                    elif lives[1]:
+                        lives[1]=False
+                    elif lives[2]:
+                        lives[2]=False
+            else:
+                print("Not clicking an equation!")
+    heart_frame: int = (frame_counter // FPS) % len(heart_sprite)
+    heart_death: int = (frame_counter // FPS) % len(heart_gone)
+    if lives[2]==True:
+        screen.blit(heart_sprite[heart_frame],HEART1POS)
+    else: 
+        screen.blit(heart_gone[-1],HEART1POS)
+    if lives[1]==True:
+        screen.blit(heart_sprite[heart_frame],HEART2POS)
+    else: 
+        screen.blit(heart_gone[-1],HEART2POS)
+    if lives[0]==True:
+        screen.blit(heart_sprite[heart_frame],HEART3POS)
+    else: 
+        screen.blit(heart_gone[-1],HEART3POS)
+
+
+
             if equation_1_box.collidepoint(event.pos):
                 if problems[0] == correct:            
                     return True

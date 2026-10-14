@@ -47,7 +47,9 @@ async def main() -> None:
 
 
     # load hearts
+    heart_gone: list[pygame.Surface] = load_sprites("Heart_gone", 12)
     heart_sprite: list[pygame.Surface] = load_sprites("Heart_Idle", 4)
+    lives: list[bool] = [True, True, True]
 
     # MAIN GAME LOOP
     running: bool = True
