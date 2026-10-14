@@ -29,9 +29,9 @@ def display_game_over_screen(screen: pygame.Surface) -> str:
 
     font: pygame.font.Font = pygame.font.Font(size=48)
     bigger_font: pygame.font.Font = pygame.font.Font(size=100)
-    text_box: pygame.Surface = font.render("Press SPACE to try again.", True, "white")
+    text_box: pygame.Surface = font.render("GAME OVER", True, "white")
     screen.blit(text_box, (screen.get_width() // 2 - text_box.get_width() // 2, screen.get_height() // 2))
-    text_box2: pygame.Surface = bigger_font.render("GAME OVER", True, "white")
+    text_box2: pygame.Surface = bigger_font.render("Press space to try again", True, "white")
     screen.blit(text_box2, (screen.get_width() // 2 - text_box2.get_width() // 2, screen.get_height() // 3))
 
 
