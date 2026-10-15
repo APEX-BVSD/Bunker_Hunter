@@ -23,6 +23,7 @@ def display_grid_screen(screen: pygame.Surface,background_image: pygame.surface,
         screen.blit(heart_sprite[heart_frame],HEART1POS)
     else: 
         screen.blit(heart_gone[-1],HEART1POS)
+        return "GAME_OVER"
     if lives[1]==True:
         screen.blit(heart_sprite[heart_frame],HEART2POS)
     else: 

@@ -91,7 +91,7 @@ async def main() -> None:
                 game_state = "Y_QUESTION_SCREEN"
                 
         elif game_state == "GAME_OVER":
-            game_state = display_game_over_screen(screen)
+            game_state = display_game_over_screen(screen,lives)
 
         else:
             print(f"Invalid game state: {game_state}")
