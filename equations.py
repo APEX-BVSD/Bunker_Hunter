@@ -9,7 +9,7 @@ Kaplan Tonelli
 from settings import *
 import random
 
-def get_equation_set(coord: int) -> dict:
+def get_equation_set(coord: int) -> dict: 
     """
     Creates a set of math equations based on the coordinate selected.
 
