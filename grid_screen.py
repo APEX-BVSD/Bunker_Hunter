@@ -14,13 +14,23 @@ from settings import *
 from problem_screen import *
 from equations import *
 
-def display_grid_screen(screen: pygame.Surface,background_image: pygame.surface, heart_sprite: list[pygame.Surface], frame_counter: int,lives:list[bool]) -> str:
+def display_grid_screen(screen: pygame.Surface,background_image: pygame.surface, heart_sprite: list[pygame.Surface], heart_gone: list[pygame.Surface],  frame_counter: int,lives:list[bool]) -> str:
     screen.blit(background_image, (0, 0))
     #hearts
     heart_frame: int = (frame_counter // FPS) % len(heart_sprite)
-    screen.blit(heart_sprite[heart_frame],(0,0))
-    screen.blit(heart_sprite[heart_frame],(35,0))
-    screen.blit(heart_sprite[heart_frame],(67,0))
+
+    if lives[2]==True:
+        screen.blit(heart_sprite[heart_frame],HEART1POS)
+    else: 
+        screen.blit(heart_gone[-1],HEART1POS)
+    if lives[1]==True:
+        screen.blit(heart_sprite[heart_frame],HEART2POS)
+    else: 
+        screen.blit(heart_gone[-1],HEART2POS)
+    if lives[0]==True:
+        screen.blit(heart_sprite[heart_frame],HEART3POS)
+    else: 
+        screen.blit(heart_gone[-1],HEART3POS)
 
     # stay on the current screen
     return "PLAYING"
