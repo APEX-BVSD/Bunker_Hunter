@@ -65,14 +65,14 @@ async def main() -> None:
             game_state = display_mode_screen(screen)
 
         elif game_state == "PLAYING":
-            game_state = display_grid_screen(screen, bigger_image, heart_sprite, frame_counter)
+            game_state = display_grid_screen(screen, bigger_image, heart_sprite, frame_counter, lives)
             coord: tuple = get_coordinates()
             if coord is not None:
                 game_state = "X_QUESTION_SCREEN"
                 equations_x: dict = get_equation_set(coord[0])
                 equations_y: dict = get_equation_set(coord[1])
         elif game_state == "X_QUESTION_SCREEN":
-            result: bool = display_question_screen(screen, equations_x)
+            result: bool = display_question_screen(screen, equations_x, heart_sprite, heart_gone, frame_counter, lives)
             if result:
                 game_state = "Y_QUESTION_SCREEN"
             elif result == False:
@@ -81,7 +81,7 @@ async def main() -> None:
                 game_state = "X_QUESTION_SCREEN"
 
         elif game_state == "Y_QUESTION_SCREEN":
-            result: bool = display_question_screen(screen, equations_y)
+            result: bool = display_question_screen(screen, equations_y, heart_sprite, heart_gone, frame_counter, lives)
             if result:
                 game_state = "PLAYING"
             elif result == False:
