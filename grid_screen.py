@@ -33,6 +33,7 @@ def display_grid_screen(screen: pygame.Surface, background_image: pygame.Surface
 
     # Display hearts based on remaining lives
     heart_frame: int = (frame_counter // FPS) % len(heart_sprite)
+    bunkers="30"
 
     if lives[2] == True:
         screen.blit(heart_sprite[heart_frame], HEART1POS)
