@@ -1,5 +1,5 @@
 """
-Displays the game over screen screen for Bunker Hunters game.
+Displays the game over screen for Bunker Hunters game.
 October 2026
 Yoav Bierkatz
 Jude Averitt
@@ -10,7 +10,7 @@ Kaplan Tonelli
 import pygame
 from pygame import font
 
-def display_game_over_screen(screen: pygame.Surface, lives:list[bool]) -> str:
+def display_game_over_screen(screen: pygame.Surface, lives: list[bool]) -> str:
     """
     Displays the game over screen text and waits for the player to press the space key.
     Returns "START_SCREEN" as the next game state.
@@ -34,10 +34,10 @@ def display_game_over_screen(screen: pygame.Surface, lives:list[bool]) -> str:
     text_box2: pygame.Surface = bigger_font.render("GAME OVER", True, "white")
     screen.blit(text_box2, (screen.get_width() // 2 - text_box2.get_width() // 2, screen.get_height() // 3))
 
-    #Reset everything
-    lives[0]=True
-    lives[1]=True
-    lives[2]=True
+    # Reset everything
+    lives[0] = True
+    lives[1] = True
+    lives[2] = True
 
 
 
