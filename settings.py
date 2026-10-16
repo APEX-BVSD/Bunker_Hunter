@@ -18,7 +18,7 @@ COLUMN_SIZE: int = GRID_HEIGHT // GRID_ROWS
 EQUATION_RECT_DIMENSIONS: tuple = (200,40)
 LOW: int = -20
 HIGH: int = 20
-
+ALIEN_COUNT: int = 30
 FPS: int = 60
 
 GAME_TITLE: str = "Your Game Title"
@@ -26,4 +26,7 @@ GAME_TITLE: str = "Your Game Title"
 HEART1POS: tuple = (0,0)
 HEART2POS: tuple = (35,0)
 HEART3POS: tuple = (67,0)
-ALIEN_COUNT: int = 30
+
+HEART1POS2: tuple = (0,815)
+HEART2POS2: tuple = (35,815)
+HEART3POS2: tuple = (67,815)
