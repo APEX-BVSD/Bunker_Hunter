@@ -47,7 +47,31 @@ async def main() -> None:
 
 
     # load hearts
+    heart_gone: list[pygame.Surface] = load_sprites("Heart_gone", 12)
     heart_sprite: list[pygame.Surface] = load_sprites("Heart_Idle", 4)
+    lives: list[bool] = [True, True, True]
+
+    # load dead bunkers
+    dead_bunker_sprite: pygame.Surface = pygame.image.load("assets/dead_bunker_sprite.png")
+
+    # bunkers
+    ROW_COUNT = 0
+    bunker_aliens: list[list[bool]] = []
+    for  _ in range(GRID_ROWS):
+        bunker_aliens.append( [False] * GRID_COLUMNS )
+    # Randomly Generates the location of the bunkers 
+    aliens_placed: int = 0
+    while aliens_placed < ALIEN_COUNT:
+        col: int = random.randint(0,GRID_ROWS - 1)
+        row: int = random.randint(0,GRID_COLUMNS - 1)
+        if not bunker_aliens[row][col]:
+            bunker_aliens[row][col] = True
+            aliens_placed += 1
+    print(bunker_aliens)
+
+    bunker_states: list[list[bool]] = []
+    for  _ in range(GRID_ROWS):
+        bunker_states.append( [False] * GRID_COLUMNS )
 
     # MAIN GAME LOOP
     running: bool = True
@@ -63,16 +87,40 @@ async def main() -> None:
             game_state = display_mode_screen(screen)
 
         elif game_state == "PLAYING":
-            game_state = display_grid_screen(screen, bigger_image, heart_sprite, frame_counter)
+            game_state = display_grid_screen(screen, bigger_image, heart_sprite, frame_counter, lives, bunker_aliens, bunker_states, dead_bunker_sprite)
             coord: tuple = get_coordinates()
             if coord is not None:
-                game_state = "QUESTION_SCREEN"
-                equations: dict = get_equation_set(coord)
+                game_state = "X_QUESTION_SCREEN"
+                equations_x: dict = get_equation_set(coord[0])
+                equations_y: dict = get_equation_set(coord[1])
+        elif game_state == "X_QUESTION_SCREEN":
+            result: bool = display_question_screen(screen, equations_x, heart_sprite, heart_gone, frame_counter, lives)
+            if result:
+                game_state = "Y_QUESTION_SCREEN"
+            elif result == False:
+                game_state = "PLAYING"
+            else: 
+                game_state = "X_QUESTION_SCREEN"
 
-        elif game_state == "QUESTION_SCREEN":
-            
-            game_state = display_question_screen(screen, equations, coord)
+        elif game_state == "Y_QUESTION_SCREEN":
+            result: bool = display_question_screen(screen, equations_y, heart_sprite, heart_gone, frame_counter, lives)
+            if result:
+                #Finish implementing the bunkers     
+                bunker_states[row][col] == True
+                row, col = coord
+                game_state = "PLAYING"
+                col: int = coord[0]
+                row: int = coord[1]
 
+                if bunker_aliens[row][col] and bunker_states[row][col] == False:
+                    display_dead_bunker(screen)
+                    bunker_states[row][col] = True
+                
+            elif result == False:
+                game_state = "PLAYING"
+            else: 
+                game_state = "Y_QUESTION_SCREEN"
+                
         elif game_state == "GAME_OVER":
             pass
 
