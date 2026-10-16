@@ -88,7 +88,7 @@ async def main() -> None:
             game_state = display_mode_screen(screen)
 
         elif game_state == "PLAYING":
-            game_state = display_grid_screen(screen, bigger_image, heart_sprite, frame_counter, lives, bunker_aliens, bunker_states, dead_bunker_sprite)
+            game_state = display_grid_screen(screen, bigger_image, heart_sprite, frame_counter, lives, heart_gone, bunker_aliens, bunker_states, dead_bunker_sprite)
             coord: tuple = get_coordinates()
             if coord is not None:
                 game_state = "X_QUESTION_SCREEN"
