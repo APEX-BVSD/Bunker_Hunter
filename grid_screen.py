@@ -40,7 +40,6 @@ def get_coordinates() -> tuple:
                 coord: tuple = (mouse_x // (SCREEN_WIDTH//GRID_ROWS)) + 1,(mouse_y // (SCREEN_HEIGHT//GRID_COLUMNS)) + 1
                 # get problems for x coordinate and shuffle
                 return coord
-    #screen.blit(insert_sprite_here)
 
     
 

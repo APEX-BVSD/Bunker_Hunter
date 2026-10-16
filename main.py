@@ -113,7 +113,6 @@ async def main() -> None:
                 row: int = coord[1]
 
                 if bunker_aliens[row][col] and bunker_states[row][col] == False:
-                    display_dead_bunker(screen)
                     bunker_states[row][col] = True
                 
             elif result == False:
