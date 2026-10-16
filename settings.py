@@ -22,3 +22,6 @@ GAME_TITLE: str = "Your Game Title"
 HEART1POS: tuple = (0,0)
 HEART2POS: tuple = (35,0)
 HEART3POS: tuple = (67,0)
+HEART1POS2: tuple = (0,815)
+HEART2POS2: tuple = (35,815)
+HEART3POS2: tuple = (67,815)
