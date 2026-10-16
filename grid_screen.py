@@ -14,7 +14,7 @@ from settings import *
 from problem_screen import *
 from equations import *
 
-def display_grid_screen(screen: pygame.Surface, background_image: pygame.Surface, heart_sprite: list[pygame.Surface], heart_gone: list[pygame.Surface],  frame_counter: int, lives: list[bool]) -> str:
+def display_grid_screen(screen: pygame.Surface,background_image: pygame.surface, heart_sprite: list[pygame.Surface], frame_counter: int,lives:list[bool], bunkers: list[list[bool]], bunker_states: list[list[bool]], dead_bunker_sprite: pygame.Surface) -> str:
     """
     Displays the game grid screen with hearts showing remaining lives.
     
@@ -49,7 +49,12 @@ def display_grid_screen(screen: pygame.Surface, background_image: pygame.Surface
     else:
         screen.blit(heart_gone[-1], HEART3POS)
 
-    # Return current game state
+    for row in range(len(bunker_states)):
+        for col in range(len(bunker_states[row])):
+            if bunker_states[row][col]:
+                screen.blit(dead_bunker_sprite,(COLUMN_SIZE * col, ROW_SIZE * row))
+                
+    # stay on the current screen
     return "PLAYING"
 
 def get_coordinates() -> tuple:
@@ -63,7 +68,10 @@ def get_coordinates() -> tuple:
     for event in pygame.event.get():
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             mouse_x, mouse_y = event.pos
-            if mouse_x <= 800 and mouse_y <= 800:
-                coord: tuple = (mouse_x // (SCREEN_WIDTH // GRID_ROWS)) + 1, (mouse_y // (SCREEN_HEIGHT // GRID_COLUMNS)) + 1
-                # Get problems for x coordinate and shuffle
+            if mouse_x <= GRID_WIDTH and mouse_y <= GRID_HEIGHT:
+                coord: tuple = (mouse_x // (SCREEN_WIDTH//GRID_ROWS)) + 1,(mouse_y // (SCREEN_HEIGHT//GRID_COLUMNS)) + 1
+                # get problems for x coordinate and shuffle
                 return coord
+
+    
+
