@@ -33,21 +33,21 @@ def display_info_screen(screen: pygame.Surface) -> str:
     text_box1: pygame.Surface = bigger_font.render("Bunker Hunters", True, "white")
     text_box2: pygame.Surface = font.render("""
     You are a high raking military officer 
-    and you're the only person trust with this 
-    mission. Your have been send out to the
-    desert where they have confirmed there
-    are 30 aliens in the desert. Your task
-    will be to find all of the anions and 
-    eliminate them.To find the aliens you will
+    and you're the only person the higher-ups
+    trust with this mission. You have been sent
+    out to the desert where they have confirmed
+    that there are 30 alien bunkers. Your task
+    will be to find all of the aliens and 
+    eliminate them. To find the bunkers you will
     select a Box and two sets of 3 equations
-    will show up you  will select the equation
+    will show up, you will select the equation
     that is correct. If you select the correct 
-    equation two times in a row you will lunch
+    equation two times in a row you will launch
     your rocket to the selected Box. If you 
     select a wrong equation you will lose a
     life. you have three lives to eliminate the
     all the alien bunkers. 
-    Good luck on you mission """, True, "white",(0, 0, 0))
+    Good luck on your mission soldier""", True, "white",(0, 0, 0))
     text_box2.set_alpha(200)
     
     text_box3: pygame.Surface = middle_font.render("""
