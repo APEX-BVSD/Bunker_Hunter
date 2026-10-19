@@ -34,20 +34,26 @@ def display_grid_screen(screen: pygame.Surface,background_image: pygame.surface,
     # Display hearts based on remaining lives
     heart_frame: int = (frame_counter // FPS) % len(heart_sprite)
     bunkers="30"
+    
+    font: pygame.font.Font = pygame.font.Font(size=48)
+    text_box: pygame.Surface = font.render("Bunkers left:"+bunkers, True, "black")
+    screen.blit(text_box, (550, 825))
+    image: pygame.Surface = pygame.image.load("assets/Missile_Idle0.png")
+    screen.blit(image, (350, 815))
 
     if lives[2] == True:
-        screen.blit(heart_sprite[heart_frame], HEART1POS)
+        screen.blit(heart_sprite[heart_frame], HEART1POS2)
     else:
-        screen.blit(heart_gone[-1], HEART1POS)
+        screen.blit(heart_gone[-1], HEART1POS2)
         return "GAME_OVER"
     if lives[1] == True:
-        screen.blit(heart_sprite[heart_frame], HEART2POS)
+        screen.blit(heart_sprite[heart_frame], HEART2POS2)
     else:
-        screen.blit(heart_gone[-1], HEART2POS)
+        screen.blit(heart_gone[-1], HEART2POS2)
     if lives[0] == True:
-        screen.blit(heart_sprite[heart_frame], HEART3POS)
+        screen.blit(heart_sprite[heart_frame], HEART3POS2)
     else:
-        screen.blit(heart_gone[-1], HEART3POS)
+        screen.blit(heart_gone[-1], HEART3POS2)
 
     for row in range(len(bunker_states)):
         for col in range(len(bunker_states[row])):
