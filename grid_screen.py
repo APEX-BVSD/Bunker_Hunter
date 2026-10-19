@@ -14,7 +14,7 @@ from settings import *
 from problem_screen import *
 from equations import *
 
-def display_grid_screen(screen: pygame.Surface,background_image: pygame.surface, heart_sprite: list[pygame.Surface], frame_counter: int,lives:list[bool], heart_gone: list[pygame.Surface],bunkers: list[list[bool]], bunker_states: list[list[bool]], dead_bunker_sprite: pygame.Surface) -> str:
+def display_grid_screen(screen: pygame.Surface,background_image: pygame.surface, heart_sprite: list[pygame.Surface], frame_counter: int,lives:list[bool], heart_gone: list[pygame.Surface],bunkers: list[list[bool]], bunker_states: list[list[bool]], dead_bunker_sprite: pygame.Surface, bunker_number:str) -> str:
     """
     Displays the game grid screen with hearts showing remaining lives.
     
@@ -33,10 +33,9 @@ def display_grid_screen(screen: pygame.Surface,background_image: pygame.surface,
 
     # Display hearts based on remaining lives
     heart_frame: int = (frame_counter // FPS) % len(heart_sprite)
-    bunkers="30"
     
     font: pygame.font.Font = pygame.font.Font(size=48)
-    text_box: pygame.Surface = font.render("Bunkers left:"+bunkers, True, "black")
+    text_box: pygame.Surface = font.render(f"Bunkers left: {bunker_number}", True, "black")
     screen.blit(text_box, (550, 825))
     image: pygame.Surface = pygame.image.load("assets/Missile_Idle0.png")
     screen.blit(image, (350, 815))
