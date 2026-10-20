@@ -23,10 +23,10 @@ FPS: int = 60
 
 GAME_TITLE: str = "Bunker Hunter"
 
-HEART_1_POS: tuple = (0, 0)
-HEART_2_POS: tuple = (35, 0)
-HEART_3_POS: tuple = (67, 0)
+HEART1POS: tuple = (0, 0)
+HEART2POS: tuple = (35, 0)
+HEART3POS: tuple = (67, 0)
 
-HEART_1_POS_BOTTOM: tuple = (0, 815)
-HEART_2_POS_BOTTOM: tuple = (35, 815)
-HEART_3_POS_BOTTOM: tuple = (67, 815)
+HEART1POS2: tuple = (0,815)
+HEART2POS2: tuple = (35,815)
+HEART3POS2: tuple = (67,815)
