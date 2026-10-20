@@ -35,6 +35,7 @@ def display_grid_screen(screen: pygame.Surface, background_image: pygame.Surface
         str: The game state for the next frame
     """
     screen.blit(background_image, (0, 0))
+    #sound
 
     # Display hearts based on remaining lives
     heart_frame: int = (frame_counter // FPS) % len(heart_sprite)
