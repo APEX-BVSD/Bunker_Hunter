@@ -61,6 +61,9 @@ async def main() -> None:
     # load dead bunkers
     dead_bunker_sprite: pygame.Surface = pygame.image.load("assets/dead_bunker_sprite.png")
 
+    # Load dead desert sprite
+    dead_desert_sprite: pygame.Surface = pygame.image.load("assets/dead_desert_sprite.png")
+
     # bunkers
     bunker_number:str =30
     ROW_COUNT = 0
@@ -97,7 +100,7 @@ async def main() -> None:
             game_state = display_mode_screen(screen)
 
         elif game_state == "PLAYING":
-            game_state = display_grid_screen(screen, bigger_image, heart_sprite, frame_counter, lives, heart_gone, bunker_aliens, bunker_states, dead_bunker_sprite,bunker_number)
+            game_state = display_grid_screen(screen, bigger_image, heart_sprite, frame_counter, lives, heart_gone, bunker_aliens, bunker_states, dead_bunker_sprite,bunker_number,dead_desert_sprite)
             coord: tuple = get_coordinates()
             if coord is not None:
                 game_state = "X_QUESTION_SCREEN"
