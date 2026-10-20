@@ -21,7 +21,7 @@ HIGH: int = 20
 ALIEN_COUNT: int = 30
 FPS: int = 60
 
-GAME_TITLE: str = "Your Game Title"
+GAME_TITLE: str = "Bunker Hunters"
 
 HEART1POS: tuple = (0,0)
 HEART2POS: tuple = (35,0)
