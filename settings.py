@@ -1,9 +1,9 @@
 """
 Contains settings for the game.
-Month Year
-First Last
-First Last 
-First Last 
+October 2026
+Yoav Bierkatz
+Jude Averitt
+Kaplan Tonelli
 """
 
 
@@ -15,18 +15,18 @@ GRID_ROWS: int = 10
 GRID_COLUMNS: int = 10
 ROW_SIZE: int = GRID_WIDTH // GRID_COLUMNS
 COLUMN_SIZE: int = GRID_HEIGHT // GRID_ROWS
-EQUATION_RECT_DIMENSIONS: tuple = (200,40)
+EQUATION_RECT_DIMENSIONS: tuple = (200, 40)
 LOW: int = -20
 HIGH: int = 20
 ALIEN_COUNT: int = 30
 FPS: int = 60
 
-GAME_TITLE: str = "Bunker Hunters"
+GAME_TITLE: str = "Bunker Hunter"
 
-HEART1POS: tuple = (0,0)
-HEART2POS: tuple = (35,0)
-HEART3POS: tuple = (67,0)
+HEART_1_POS: tuple = (0, 0)
+HEART_2_POS: tuple = (35, 0)
+HEART_3_POS: tuple = (67, 0)
 
-HEART1POS2: tuple = (0,815)
-HEART2POS2: tuple = (35,815)
-HEART3POS2: tuple = (67,815)
+HEART_1_POS_BOTTOM: tuple = (0, 815)
+HEART_2_POS_BOTTOM: tuple = (35, 815)
+HEART_3_POS_BOTTOM: tuple = (67, 815)

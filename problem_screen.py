@@ -41,13 +41,14 @@ def display_question_screen(screen: pygame.Surface, equations: dict, heart_sprit
 
     problems: list[str] = equations["equations"]
 
-    asking_text_box: pygame.Surface = bigger_font.render(f"Which equation equals {equations["coord"]}?", True, "white")
-
-    equation1: pygame.Surface = font.render(problems[0], True, "white")
-
-    equation2: pygame.Surface = font.render(problems[1], True, "white")
-
-    equation3: pygame.Surface = font.render(problems[2], True, "white")
+    asking_text_box: pygame.Surface = bigger_font.render(f"Which equation equals {equations["coord"]}?", True, "white","Black")
+    asking_text_box.set_alpha(180)
+    equation1: pygame.Surface = font.render(problems[0], True, "white","Black")
+    equation1.set_alpha(180)
+    equation2: pygame.Surface = font.render(problems[1], True, "white","Black")
+    equation2.set_alpha(180)
+    equation3: pygame.Surface = font.render(problems[2], True, "white","Black")
+    equation3.set_alpha(180)
 
     # Create clickable rectangles for each equation
     screen.blit(asking_text_box, (screen.get_width() // 2 - asking_text_box.get_width() // 2, screen.get_height() // 10))
@@ -64,7 +65,9 @@ def display_question_screen(screen: pygame.Surface, equations: dict, heart_sprit
     equation_2_box: pygame.Rect = pygame.Rect(screen.get_width() // 2 - equation2.get_width() // 2, screen.get_height() // 3 + 40, EQUATION_RECT_DIMENSIONS[0], EQUATION_RECT_DIMENSIONS[1])
 
     equation_3_box: pygame.Rect = pygame.Rect(screen.get_width() // 2 - equation3.get_width() // 2, screen.get_height() // 2, EQUATION_RECT_DIMENSIONS[0], EQUATION_RECT_DIMENSIONS[1])
-
+    
+    
+    
     # Display hearts based on remaining lives
     heart_frame: int = (frame_counter // FPS) % len(heart_sprite)
     heart_death: int = (frame_counter // FPS) % len(heart_gone)
