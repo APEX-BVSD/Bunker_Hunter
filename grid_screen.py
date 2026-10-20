@@ -14,7 +14,8 @@ from settings import *
 from problem_screen import *
 from equations import *
 
-def display_grid_screen(screen: pygame.Surface, background_image: pygame.Surface, heart_sprite: list[pygame.Surface], frame_counter: int, lives: list[bool], heart_gone: list[pygame.Surface], bunker_aliens: list[list[bool]], bunker_states: list[list[bool]], dead_bunker_sprite: pygame.Surface, bunker_number: str, dead_desert_sprite: pygame.Surface) -> str:
+def display_grid_screen(screen: pygame.Surface,background_image: pygame.surface, heart_sprite: list[pygame.Surface], frame_counter: int,lives:list[bool], heart_gone: list[pygame.Surface], bunker_aliens: list[list[bool]], bunker_states: list[list[bool]], dead_bunker_sprite: pygame.Surface, bunker_number:str, dead_desert_sprite: pygame.Surface) -> str:
+
     """
     Displays the game grid screen with hearts showing remaining lives.
     
