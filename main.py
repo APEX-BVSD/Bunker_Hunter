@@ -52,8 +52,10 @@ async def main() -> None:
     heart_sprite: list[pygame.Surface] = load_sprites("Heart_Idle", 4)
     lives: list[bool] = [True, True, True]
 
-    # load dead bunkers
+    # load more sprites
     dead_bunker_sprite: pygame.Surface = pygame.image.load("assets/dead_bunker_sprite.png")
+    idle_missile_sprite: pygame.Surface = pygame.image.load("assets/Missile_Idle0.png")
+    flying_missile_sprite: pygame.Surface = pygame.image.load("assets/missile_flying_sprite.png")
 
     # Load dead desert sprite
     dead_desert_sprite: pygame.Surface = pygame.image.load("assets/dead_desert_sprite.png")
@@ -77,8 +79,16 @@ async def main() -> None:
     for  _ in range(GRID_ROWS):
         bunker_states.append( [False] * GRID_COLUMNS )
 
+    # if missile is flying
+    missile_flying: bool = False
+    missile_flying_location: int = 815
+    missile_flying_speed: int = (SCREEN_HEIGHT - MISSILE_OFFSET) // FPS
+    
+    
+
     # MAIN GAME LOOP
     running: bool = True
+    last_clicked_coord: tuple = (-1, -1)
     game_state: str = "START_SCREEN"
     while running:
         if game_state == "START_SCREEN":
@@ -91,12 +101,26 @@ async def main() -> None:
             game_state = display_mode_screen(screen)
 
         elif game_state == "PLAYING":
-            game_state = display_grid_screen(screen, bigger_image, heart_sprite, frame_counter, lives, heart_gone, bunker_aliens, bunker_states, dead_bunker_sprite, bunker_number, dead_desert_sprite)
             coord: tuple = get_coordinates()
+            
             if coord is not None:
                 game_state = "X_QUESTION_SCREEN"
                 equations_x: dict = get_equation_set(coord[0])
                 equations_y: dict = get_equation_set(coord[1])
+                last_clicked_coord = coord
+
+            game_state = display_grid_screen(screen, bigger_image, heart_sprite, frame_counter,
+                                            lives, heart_gone, bunker_aliens, bunker_states, dead_bunker_sprite, 
+                                            bunker_number, dead_desert_sprite, idle_missile_sprite, flying_missile_sprite,
+                                            missile_flying, missile_flying_location, missile_flying_speed, last_clicked_coord)
+            
+            if missile_flying:
+                missile_flying_location -= missile_flying_speed
+
+            if missile_flying_location <= 0:
+                missile_flying = False
+                missile_flying_location = 815
+
         elif game_state == "X_QUESTION_SCREEN":
             result: bool = display_question_screen(screen, equations_x, heart_sprite, heart_gone, frame_counter, lives)
             if result:
@@ -119,6 +143,8 @@ async def main() -> None:
                     bunker_states[row][col] = True
                     if bunker_aliens[row][col]:
                         bunker_number-=1
+                missile_flying = True
+                
                     
                 game_state = "PLAYING"
 
