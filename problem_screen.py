@@ -11,7 +11,7 @@ from pygame import font
 from equations import *
 from settings import *
 
-def display_question_screen(screen: pygame.Surface, equations: dict, heart_sprite: list[pygame.Surface], heart_gone: list[pygame.Surface], frame_counter: int, lives: list[bool]) -> bool:
+def display_question_screen(screen: pygame.Surface, equations: dict, heart_sprite: list[pygame.Surface], heart_gone: list[pygame.Surface], frame_counter: int, lives: list[bool],owchie_sound:pygame.mixer.Sound, explosion_sound:pygame.mixer.Sound, background_music: pygame.mixer.Sound) -> bool:
     """
     Displays the question screen with three equation choices and handles user selection.
 
@@ -86,10 +86,11 @@ def display_question_screen(screen: pygame.Surface, equations: dict, heart_sprit
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
 
             if equation_1_box.collidepoint(event.pos):
-                if problems[0] == correct:            
+                if problems[0] == correct:
+                    explosion_sound.play()                  
                     return True
-                else:                 
-                    
+                else:
+                    owchie_sound.play()              
                     if lives[0]:
                         lives[0] = False
                     elif lives[1]:
@@ -99,8 +100,10 @@ def display_question_screen(screen: pygame.Surface, equations: dict, heart_sprit
                     return False
             elif equation_2_box.collidepoint(event.pos):
                 if problems[1] == correct:
+                    explosion_sound.play()    
                     return True
                 else:  
+                    owchie_sound.play()    
                     if lives[0]:
                         lives[0] = False
                     elif lives[1]:
@@ -110,8 +113,10 @@ def display_question_screen(screen: pygame.Surface, equations: dict, heart_sprit
                     return False
             elif equation_3_box.collidepoint(event.pos):
                 if problems[2] == correct: 
+                    explosion_sound.play()    
                     return True
-                else:          
+                else:         
+                    owchie_sound.play()     
                     if lives[0]:
                         lives[0] = False
                     elif lives[1]:

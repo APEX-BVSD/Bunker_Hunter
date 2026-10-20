@@ -4,6 +4,7 @@ October 2026
 Yoav Bierkatz
 Jude Averitt
 Kaplan Tonelli
+Background music from pixabay(https://pixabay.com/music/electronic-game-game-music-508018/)
 """
 
 import asyncio
@@ -17,6 +18,7 @@ from equations import *
 from problem_screen import *
 from Intro_screen import *
 from game_over_screen import *
+pygame.mixer.init()
 
 
 async def main() -> None:
@@ -26,8 +28,12 @@ async def main() -> None:
     Returns:
         None
     """
-
-
+    #sounds
+    owchie_sound: pygame.mixer.Sound = pygame.mixer.Sound("assets/owchie.ogg")
+    explosion_sound: pygame.mixer.Sound = pygame.mixer.Sound("assets/explosion.ogg")
+    background_music: pygame.mixer.Sound = pygame.mixer.Sound("assets/Background_Music.ogg")
+    background_music.set_volume(0.10)
+    
     background_color: tuple = (100, 255, 100)
     pygame.init()
 
@@ -55,8 +61,6 @@ async def main() -> None:
     # load dead bunkers
     dead_bunker_sprite: pygame.Surface = pygame.image.load("assets/dead_bunker_sprite.png")
 
-    # Load dead desert sprite
-    dead_desert_sprite: pygame.Surface = pygame.image.load("assets/dead_desert_sprite.png")
     # bunkers
     bunker_number:str =30
     ROW_COUNT = 0
@@ -80,7 +84,9 @@ async def main() -> None:
     # MAIN GAME LOOP
     running: bool = True
     game_state: str = "START_SCREEN"
+    background_music.play(-1)
     while running:
+
         if game_state == "START_SCREEN":
             game_state = display_start_screen(screen)
         
@@ -91,14 +97,14 @@ async def main() -> None:
             game_state = display_mode_screen(screen)
 
         elif game_state == "PLAYING":
-            game_state = display_grid_screen(screen, bigger_image, heart_sprite, frame_counter, lives, heart_gone, bunker_aliens, bunker_states, dead_bunker_sprite, bunker_number, dead_desert_sprite)
+            game_state = display_grid_screen(screen, bigger_image, heart_sprite, frame_counter, lives, heart_gone, bunker_aliens, bunker_states, dead_bunker_sprite,bunker_number)
             coord: tuple = get_coordinates()
             if coord is not None:
                 game_state = "X_QUESTION_SCREEN"
                 equations_x: dict = get_equation_set(coord[0])
                 equations_y: dict = get_equation_set(coord[1])
         elif game_state == "X_QUESTION_SCREEN":
-            result: bool = display_question_screen(screen, equations_x, heart_sprite, heart_gone, frame_counter, lives)
+            result: bool = display_question_screen(screen, equations_x, heart_sprite, heart_gone, frame_counter, lives, owchie_sound, explosion_sound,background_music)
             if result:
                 game_state = "Y_QUESTION_SCREEN"
             elif result == False:
@@ -107,7 +113,7 @@ async def main() -> None:
                 game_state = "X_QUESTION_SCREEN"
 
         elif game_state == "Y_QUESTION_SCREEN":
-            result: bool = display_question_screen(screen, equations_y, heart_sprite, heart_gone, frame_counter, lives)
+            result: bool = display_question_screen(screen, equations_y, heart_sprite, heart_gone, frame_counter, lives, owchie_sound, explosion_sound,background_music)
             if result:
                 #Finish implementing the bunkers     
                 bunker_states[row][col] == True
@@ -115,13 +121,10 @@ async def main() -> None:
                 row -= 1
                 col -= 1
 
-                if bunker_states[row][col] == False:
+                if bunker_aliens[row][col] and bunker_states[row][col] == False:
                     bunker_states[row][col] = True
-                    if bunker_aliens[row][col]:
-                        bunker_number-=1
-                    
-                game_state = "PLAYING"
-
+                    bunker_number-=1
+                game_state = "PLAYING"                
             elif result == False:
                 game_state = "PLAYING"
             else: 

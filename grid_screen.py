@@ -14,7 +14,7 @@ from settings import *
 from problem_screen import *
 from equations import *
 
-def display_grid_screen(screen: pygame.Surface,background_image: pygame.surface, heart_sprite: list[pygame.Surface], frame_counter: int,lives:list[bool], heart_gone: list[pygame.Surface], bunker_aliens: list[list[bool]], bunker_states: list[list[bool]], dead_bunker_sprite: pygame.Surface, bunker_number:str, dead_desert_sprite: pygame.Surface) -> str:
+def display_grid_screen(screen: pygame.Surface,background_image: pygame.surface, heart_sprite: list[pygame.Surface], frame_counter: int,lives:list[bool], heart_gone: list[pygame.Surface],bunkers: list[list[bool]], bunker_states: list[list[bool]], dead_bunker_sprite: pygame.Surface, bunker_number:str) -> str:
     """
     Displays the game grid screen with hearts showing remaining lives.
     
@@ -30,6 +30,7 @@ def display_grid_screen(screen: pygame.Surface,background_image: pygame.surface,
         The game state for the next frame
     """
     screen.blit(background_image, (0, 0))
+    #sound
 
     # Display hearts based on remaining lives
     heart_frame: int = (frame_counter // FPS) % len(heart_sprite)
@@ -57,10 +58,7 @@ def display_grid_screen(screen: pygame.Surface,background_image: pygame.surface,
     for row in range(len(bunker_states)):
         for col in range(len(bunker_states[row])):
             if bunker_states[row][col]:
-                if bunker_aliens[row][col]:
-                    screen.blit(dead_bunker_sprite,(COLUMN_SIZE * col, ROW_SIZE * row))
-                else:  
-                    screen.blit(dead_desert_sprite,(COLUMN_SIZE * col, ROW_SIZE * row))
+                screen.blit(dead_bunker_sprite,(COLUMN_SIZE * col, ROW_SIZE * row))
                 
     # stay on the current screen
     return "PLAYING"
