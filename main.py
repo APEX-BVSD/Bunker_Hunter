@@ -4,6 +4,8 @@ October 2026
 Yoav Bierkatz
 Jude Averitt
 Kaplan Tonelli
+Main background image from (https://easy-peasy.ai/ai-image-generator/images/genera-un-pixel-art-9b8a92a9-eb53-4ce5-8ae0-d74c8f95d824)
+Green alien image on main background from (https://www.vecteezy.com/vector-art/66675512-pixel-alien-emerging-from-ground-green-extraterrestrial-character-retro-game-art)
 Background music from pixabay(https://pixabay.com/music/electronic-game-game-music-508018/)
 """
 
