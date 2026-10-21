@@ -28,15 +28,15 @@ async def main() -> None:
     Returns:
         None
     """
+    pygame.init()
     #sounds
     owchie_sound: pygame.mixer.Sound = pygame.mixer.Sound("assets/owchie.ogg")
     explosion_sound: pygame.mixer.Sound = pygame.mixer.Sound("assets/explosion.ogg")
-    background_music: pygame.mixer.Sound = pygame.mixer.Sound("assets/Background_Music.ogg")
+    background_music: pygame.mixer.Sound = pygame.mixer.Sound("assets/background_music.ogg")
     background_music.set_volume(0.10)
     
     background_color: tuple = (100, 255, 100)
-    pygame.init()
-
+    
     # set the screen dimensions
     screen: pygame.Surface = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
@@ -175,3 +175,4 @@ def load_sprites(file_name: str, sprite_count: int) -> list[pygame.Surface]:
 
 
 asyncio.run(main())
+
