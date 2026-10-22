@@ -38,6 +38,7 @@ async def main() -> None:
     background_music: pygame.mixer.Sound = pygame.mixer.Sound("assets/background_music.ogg")
     background_music.set_volume(0.10)
     ding_sound: pygame.mixer.Sound = pygame.mixer.Sound("assets/Ding.ogg")
+    win_sound: pygame.mixer.Sound = pygame.mixer.Sound("assets/You_Win.ogg")
     
     background_color: tuple = (100, 255, 100)
     
@@ -178,6 +179,7 @@ async def main() -> None:
             game_state = display_game_over_screen(screen,lives,main_image)
        
         elif game_state == "WIN_SCREEN":
+             win_sound.play()
              game_state = display_win_screen(screen,main_image)
         else:
             print(f"Invalid game state: {game_state}")
