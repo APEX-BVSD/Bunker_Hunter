@@ -48,7 +48,7 @@ def make_equation(correct_answer: int, make_correct: bool = True) -> str:
     """
 
 
-    operation: str = random.choice(["-","-"])
+    operation: str = random.choice(["+","-"])
     
     if make_correct:
         if operation == "+":

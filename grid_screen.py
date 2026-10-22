@@ -18,7 +18,7 @@ def display_grid_screen(screen: pygame.Surface,background_image: pygame.surface,
                         frame_counter: int, lives:list[bool], heart_gone: list[pygame.Surface], bunker_aliens: list[list[bool]], 
                         bunker_states: list[list[bool]], dead_bunker_sprite: pygame.Surface, bunker_number:str, 
                         dead_desert_sprite: pygame.Surface, idle_missile_sprite: pygame.Surface, flying_missile_sprite: pygame.Surface,
-                        missile_flying: bool, missile_flying_location: int, missile_flying_speed: int, last_clicked_coord: tuple) -> str:
+                        missile_flying: bool, missile_flying_location: int, missile_flying_speed: int, last_clicked_coord: tuple, game_state: str) -> str:
     """
     Displays the game grid screen with hearts showing remaining lives.
     
@@ -41,22 +41,18 @@ def display_grid_screen(screen: pygame.Surface,background_image: pygame.surface,
     font: pygame.font.Font = pygame.font.Font(size=48)
     text_box: pygame.Surface = font.render(f"Bunkers left: {bunker_number}", True, "black")
     screen.blit(text_box, (540, 825))
-
-    #display idle missile
-    if missile_flying == False:
-        screen.blit(idle_missile_sprite, (350, 815))
         
     #display flying missile
     if missile_flying and missile_flying_location >= 0:
         screen.blit(flying_missile_sprite, (350, missile_flying_location))
-
-
+    else:
+        screen.blit(idle_missile_sprite, (350, 815))
     for row in range(len(bunker_states)):
         for col in range(len(bunker_states[row])):
-            if bunker_states[row][col] and last_clicked_coord[0] != col and last_clicked_coord[1] != row:
+            if bunker_states[row][col] and (last_clicked_coord[0] -1 != col or last_clicked_coord[1] -1 != row):
                 if bunker_aliens[row][col]:
                     screen.blit(dead_bunker_sprite,(COLUMN_SIZE * col, ROW_SIZE * row))
-                else:  
+                else:
                     screen.blit(dead_desert_sprite,(COLUMN_SIZE * col, ROW_SIZE * row))  
 
         
@@ -76,8 +72,8 @@ def display_grid_screen(screen: pygame.Surface,background_image: pygame.surface,
 
 
                 
-    # stay on the current screen
-    return "PLAYING"
+    # return current game state
+    return game_state
 
 def get_coordinates() -> tuple:
     """
@@ -91,6 +87,6 @@ def get_coordinates() -> tuple:
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             mouse_x, mouse_y = event.pos
             if mouse_x <= GRID_WIDTH and mouse_y <= GRID_HEIGHT:
-                coord: tuple = (mouse_x // (SCREEN_WIDTH//GRID_ROWS)) + 1,(mouse_y // (SCREEN_HEIGHT//GRID_COLUMNS)) + 1
+                coord: tuple = (mouse_x // (GRID_WIDTH//GRID_ROWS)) + 1,(mouse_y // (GRID_HEIGHT//GRID_COLUMNS)) + 1
                 # get problems for x coordinate and shuffle
                 return coord

@@ -103,21 +103,23 @@ async def main() -> None:
         elif game_state == "PLAYING":
             coord: tuple = get_coordinates()
             
-            if coord is not None:
-                game_state = "X_QUESTION_SCREEN"
-                equations_x: dict = get_equation_set(coord[0])
-                equations_y: dict = get_equation_set(coord[1])
-                last_clicked_coord = coord
 
             game_state = display_grid_screen(screen, bigger_image, heart_sprite, frame_counter,
                                             lives, heart_gone, bunker_aliens, bunker_states, dead_bunker_sprite, 
                                             bunker_number, dead_desert_sprite, idle_missile_sprite, flying_missile_sprite,
-                                            missile_flying, missile_flying_location, missile_flying_speed, last_clicked_coord)
-            
+                                            missile_flying, missile_flying_location, missile_flying_speed, last_clicked_coord,
+                                            game_state)
+            if coord is not None:
+                last_clicked_coord = coord
+                game_state = "X_QUESTION_SCREEN"
+                equations_x: dict = get_equation_set(coord[0])
+                equations_y: dict = get_equation_set(coord[1])   
+
             if missile_flying:
                 missile_flying_location -= missile_flying_speed
 
             if missile_flying_location <= 0:
+                last_clicked_coord= (-1,-1)
                 missile_flying = False
                 missile_flying_location = 815
 
