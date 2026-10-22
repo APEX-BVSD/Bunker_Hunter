@@ -156,7 +156,7 @@ async def main() -> None:
                 row -= 1
                 col -= 1
 
-                if bunker_aliens[row][col] and bunker_states[row][col] == False:
+                if bunker_states[row][col] == False:
                     bunker_states[row][col] = True
                     if bunker_aliens[row][col]:
                         bunker_number-=1
