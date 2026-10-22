@@ -11,7 +11,7 @@ from pygame import font
 from equations import *
 from settings import *
 
-def display_question_screen(screen: pygame.Surface, equations: dict, heart_sprite: list[pygame.Surface], heart_gone: list[pygame.Surface], frame_counter: int, lives: list[bool],owchie_sound:pygame.mixer.Sound, explosion_sound:pygame.mixer.Sound, background_music: pygame.mixer.Sound) -> bool:
+def display_question_screen(screen: pygame.Surface, equations: dict, heart_sprite: list[pygame.Surface], heart_gone: list[pygame.Surface], frame_counter: int, lives: list[bool],owchie_sound:pygame.mixer.Sound, explosion_sound:pygame.mixer.Sound, background_music: pygame.mixer.Sound,main_image:pygame.Surface) -> bool:
     """
     Displays the question screen with three equation choices and handles user selection.
 
@@ -27,9 +27,8 @@ def display_question_screen(screen: pygame.Surface, equations: dict, heart_sprit
         True if correct answer selected, False if incorrect, None if no selection
     """
     # Load and display background
-    image: pygame.Surface = pygame.image.load("assets/main-screen.png")
 
-    screen.blit(image, (0, 0))
+    screen.blit(main_image, (0, 0))
 
     # Set up fonts
     font: pygame.font.Font = pygame.font.Font(size=48)

@@ -14,7 +14,7 @@ from pygame import font
 from settings import *
 
 
-def display_info_screen(screen: pygame.Surface) -> str:
+def display_info_screen(screen: pygame.Surface,main_image:pygame.Surface) -> str:
     """
     Displays the start screen text and waits for the player to press the space key.
     Returns "PLAYING" as the next game state.
@@ -29,11 +29,9 @@ def display_info_screen(screen: pygame.Surface) -> str:
     """
    
     # draw the screen
-    image: pygame.Surface = pygame.image.load("assets/main-screen.png")
     font: pygame.font.Font = pygame.font.Font(size=35)
     bigger_font: pygame.font.Font = pygame.font.Font(size=100)
     middle_font: pygame.font.Font = pygame.font.Font(size=80)
-   
     text_box1: pygame.Surface = bigger_font.render("Bunker Hunters", True, "white")
     text_box2: pygame.Surface = font.render("""
     You are a high raking military officer 
@@ -65,7 +63,7 @@ def display_info_screen(screen: pygame.Surface) -> str:
 
 
 
-    screen.blit(image, (0, 0))
+    screen.blit(main_image, (0, 0))
     screen.blit(text_box1, (screen.get_width() // 2 - text_box1.get_width() // 2, screen.get_height() // 10))
     screen.blit(text_box2, (screen.get_width() // 2 - text_box2.get_width() // 2, screen.get_height() // 4))
     screen.blit(text_box3, (screen.get_width() // 2 - text_box3.get_width() // 2, screen.get_height() // 2))

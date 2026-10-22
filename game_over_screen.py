@@ -10,7 +10,7 @@ Kaplan Tonelli
 import pygame
 from pygame import font
 
-def display_game_over_screen(screen: pygame.Surface, lives: list[bool]) -> str:
+def display_game_over_screen(screen: pygame.Surface, lives: list[bool],main_image:pygame.Surface) -> str:
     """
     Displays the game over screen text and waits for the player to press the space key.
     Returns "START_SCREEN" as the next game state.
@@ -24,8 +24,8 @@ def display_game_over_screen(screen: pygame.Surface, lives: list[bool]) -> str:
     """
     
     # draw the screen
-    image: pygame.Surface = pygame.image.load("assets/main-screen.png")
-    screen.blit(image, (0, 0))
+
+    screen.blit(main_image, (0, 0))
 
     font: pygame.font.Font = pygame.font.Font(size=48)
     bigger_font: pygame.font.Font = pygame.font.Font(size=100)

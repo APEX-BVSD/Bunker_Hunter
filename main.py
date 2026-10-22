@@ -53,6 +53,7 @@ async def main() -> None:
     # Load background image for playing screen
     original_image: pygame.Surface = pygame.image.load("assets/Desert.png")
     bigger_image: pygame.Surface = pygame.transform.scale(original_image, (800, 1000))
+    main_image: pygame.Surface = pygame.image.load("assets/main-screen.png")
 
 
     # load hearts
@@ -93,13 +94,13 @@ async def main() -> None:
     while running:
 
         if game_state == "START_SCREEN":
-            game_state = display_start_screen(screen)
+            game_state = display_start_screen(screen,main_image)
         
         elif game_state == "INTRO_SCREEN":
-            game_state = display_info_screen(screen)
+            game_state = display_info_screen(screen,main_image)
 
         elif game_state == "MODE_SCREEN":
-            game_state = display_mode_screen(screen)
+            game_state = display_mode_screen(screen,main_image)
 
         elif game_state == "PLAYING":
             game_state = display_grid_screen(screen, bigger_image, heart_sprite, frame_counter, lives, heart_gone, bunker_aliens, bunker_states, dead_bunker_sprite,bunker_number,dead_desert_sprite)
@@ -109,7 +110,7 @@ async def main() -> None:
                 equations_x: dict = get_equation_set(coord[0])
                 equations_y: dict = get_equation_set(coord[1])
         elif game_state == "X_QUESTION_SCREEN":
-            result: bool = display_question_screen(screen, equations_x, heart_sprite, heart_gone, frame_counter, lives, owchie_sound, explosion_sound,background_music)
+            result: bool = display_question_screen(screen, equations_x, heart_sprite, heart_gone, frame_counter, lives, owchie_sound, explosion_sound,background_music,main_image)
             if result:
                 game_state = "Y_QUESTION_SCREEN"
             elif result == False:
@@ -118,7 +119,7 @@ async def main() -> None:
                 game_state = "X_QUESTION_SCREEN"
 
         elif game_state == "Y_QUESTION_SCREEN":
-            result: bool = display_question_screen(screen, equations_y, heart_sprite, heart_gone, frame_counter, lives, owchie_sound, explosion_sound,background_music)
+            result: bool = display_question_screen(screen, equations_y, heart_sprite, heart_gone, frame_counter, lives, owchie_sound, explosion_sound,background_music,main_image)
             if result:
                 #Finish implementing the bunkers     
                 bunker_states[row][col] == True
@@ -136,7 +137,7 @@ async def main() -> None:
                 game_state = "Y_QUESTION_SCREEN"
                 
         elif game_state == "GAME_OVER":
-            game_state = display_game_over_screen(screen,lives)
+            game_state = display_game_over_screen(screen,lives,main_image)
 
         else:
             print(f"Invalid game state: {game_state}")
