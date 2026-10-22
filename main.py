@@ -148,12 +148,11 @@ async def main() -> None:
             result: bool = display_question_screen(screen, equations_y, heart_sprite, heart_gone, frame_counter, lives, owchie_sound, explosion_sound,background_music,main_image)
             if result:
                 #Finish implementing the bunkers     
-                bunker_states[row][col] == True
                 col, row = coord
                 row -= 1
                 col -= 1
 
-                if bunker_aliens[row][col] and bunker_states[row][col] == False:
+                if bunker_states[row][col] == False:
                     bunker_states[row][col] = True
                     if bunker_aliens[row][col]:
                         bunker_number-=1

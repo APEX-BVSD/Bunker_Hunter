@@ -49,7 +49,7 @@ def make_equation(correct_answer: int, make_correct: bool = True) -> str:
 
 
     operation: str = random.choice(["+","-"])
-    
+    #making the correct answer 
     if make_correct:
         if operation == "+":
             low: int = LOW 
@@ -63,7 +63,7 @@ def make_equation(correct_answer: int, make_correct: bool = True) -> str:
             high: int = HIGH 
             first_number: int = random.randint(low, high)
             second_number: int = first_number - correct_answer
-
+    #making the incorrect answer
     else:
         if operation == "+":
             low: int = LOW 
@@ -78,17 +78,13 @@ def make_equation(correct_answer: int, make_correct: bool = True) -> str:
             low: int = LOW + correct_answer
             high: int = HIGH 
             first_number: int = random.randint(low, high)
-            exception: int = correct_answer - first_number
+            exception: int = correct_answer + first_number
             second_number: int = random.randint(low, high)
             while second_number == exception: 
                 second_number: int = random.randint(low, high)     
 
-
-
-    if first_number < 0:
-        first_number = f"({first_number})"
-
-    if second_number < 0:
-        second_number = f"({second_number})"
+    if second_number < 0 and operation == "-":
+        second_number = second_number * -1
+        operation = "+"
    
     return f" {first_number} {operation} {second_number} = ?"
