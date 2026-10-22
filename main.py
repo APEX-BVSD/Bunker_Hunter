@@ -166,11 +166,11 @@ async def main() -> None:
                     if bunker_aliens[row][col]:
                         bunker_number-=1
                 missile_flying = True
-                if bunker_number == 0 and lives >0:
+                print(lives)
+                if bunker_number == 0:
                     game_state = "WIN_SCREEN"
-                    
-                    
-                game_state = "PLAYING"
+                else:
+                    game_state = "PLAYING"
 
             elif result == False:
                 game_state = "PLAYING"
