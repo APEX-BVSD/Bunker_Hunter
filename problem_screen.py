@@ -88,8 +88,7 @@ def display_question_screen(screen: pygame.Surface, equations: dict, heart_sprit
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
 
             if equation_1_box.collidepoint(event.pos):
-                if problems[0] == correct:
-                    explosion_sound.play()                  
+                if problems[0] == correct:              
                     return True
                 else:
                     owchie_sound.play()              
@@ -101,8 +100,7 @@ def display_question_screen(screen: pygame.Surface, equations: dict, heart_sprit
                         lives[2] = False
                     return False
             elif equation_2_box.collidepoint(event.pos):
-                if problems[1] == correct:
-                    explosion_sound.play()    
+                if problems[1] == correct:    
                     return True
                 else:  
                     owchie_sound.play()    
@@ -114,8 +112,7 @@ def display_question_screen(screen: pygame.Surface, equations: dict, heart_sprit
                         lives[2] = False                
                     return False
             elif equation_3_box.collidepoint(event.pos):
-                if problems[2] == correct: 
-                    explosion_sound.play()    
+                if problems[2] == correct:   
                     return True
                 else:         
                     owchie_sound.play()     

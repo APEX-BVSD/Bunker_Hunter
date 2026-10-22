@@ -36,6 +36,7 @@ async def main() -> None:
     explosion_sound: pygame.mixer.Sound = pygame.mixer.Sound("assets/explosion.ogg")
     background_music: pygame.mixer.Sound = pygame.mixer.Sound("assets/background_music.ogg")
     background_music.set_volume(0.10)
+    ding_sound: pygame.mixer.Sound = pygame.mixer.Sound("assets/Ding.ogg")
     
     background_color: tuple = (100, 255, 100)
     
@@ -112,6 +113,7 @@ async def main() -> None:
         elif game_state == "X_QUESTION_SCREEN":
             result: bool = display_question_screen(screen, equations_x, heart_sprite, heart_gone, frame_counter, lives, owchie_sound, explosion_sound,background_music,main_image)
             if result:
+                ding_sound.play()
                 game_state = "Y_QUESTION_SCREEN"
             elif result == False:
                 game_state = "PLAYING"
@@ -121,7 +123,8 @@ async def main() -> None:
         elif game_state == "Y_QUESTION_SCREEN":
             result: bool = display_question_screen(screen, equations_y, heart_sprite, heart_gone, frame_counter, lives, owchie_sound, explosion_sound,background_music,main_image)
             if result:
-                #Finish implementing the bunkers     
+                #Finish implementing the bunkers
+                explosion_sound.play()
                 bunker_states[row][col] == True
                 col, row = coord
                 row -= 1
