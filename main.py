@@ -20,6 +20,7 @@ from equations import *
 from problem_screen import *
 from Intro_screen import *
 from game_over_screen import *
+from winner_screen import *
 pygame.mixer.init()
 
 
@@ -75,6 +76,7 @@ async def main() -> None:
     bunker_aliens: list[list[bool]] = []
     for  _ in range(GRID_ROWS):
         bunker_aliens.append( [False] * GRID_COLUMNS )
+   
     # Randomly Generates the location of the bunkers 
     aliens_placed: int = 0
     while aliens_placed < ALIEN_COUNT:
@@ -102,7 +104,7 @@ async def main() -> None:
     game_state: str = "START_SCREEN"
     background_music.play(-1)
     while running:
-
+       
         if game_state == "START_SCREEN":
             game_state = display_start_screen(screen,main_image)
         
@@ -158,7 +160,9 @@ async def main() -> None:
                     if bunker_aliens[row][col]:
                         bunker_number-=1
                 missile_flying = True
-                
+                if bunker_number == 0 and lives >0:
+                    game_state = "WIN_SCREEN"
+                    
                     
                 game_state = "PLAYING"
 
@@ -169,7 +173,9 @@ async def main() -> None:
                 
         elif game_state == "GAME_OVER":
             game_state = display_game_over_screen(screen,lives,main_image)
-
+       
+        elif game_state == "WIN_SCREEN":
+             game_state = display_win_screen(screen,main_image)
         else:
             print(f"Invalid game state: {game_state}")
             running = False
