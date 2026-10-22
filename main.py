@@ -182,7 +182,6 @@ async def main() -> None:
             game_state = display_game_over_screen(screen, lives, main_image)
        
         elif game_state == "WIN_SCREEN":
-             win_sound.play()
              game_state = display_win_screen(screen,main_image)
         else:
             print(f"Invalid game state: {game_state}")
