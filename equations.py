@@ -83,8 +83,14 @@ def make_equation(correct_answer: int, make_correct: bool = True) -> str:
             while second_number == exception: 
                 second_number: int = random.randint(low, high)     
 
-    if second_number < 0 and operation == "-":
-        second_number = second_number * -1
-        operation = "+"
+    # avoid having negative second numbers
+    if second_number < 0:
+        second_number *= -1
+        if operation == "-":        
+            operation = "+"
+        else:
+            operation = "-"
+
+
    
     return f" {first_number} {operation} {second_number} = ?"
