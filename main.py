@@ -72,40 +72,43 @@ async def main() -> None:
     dead_desert_sprite: pygame.Surface = pygame.image.load("assets/dead_desert_sprite.png")
 
     # bunkers
-    bunker_number:str =30
+
     ROW_COUNT = 0
     bunker_aliens: list[list[bool]] = []
-    for  _ in range(GRID_ROWS):
-        bunker_aliens.append( [False] * GRID_COLUMNS )
-   
-    # Randomly Generates the location of the bunkers 
-    aliens_placed: int = 0
-    while aliens_placed < ALIEN_COUNT:
-        col: int = random.randint(0,GRID_ROWS - 1)
-        row: int = random.randint(0,GRID_COLUMNS - 1)
-        if not bunker_aliens[row][col]:
-            bunker_aliens[row][col] = True
-            aliens_placed += 1
-    print(bunker_aliens)
-
     bunker_states: list[list[bool]] = []
-    for  _ in range(GRID_ROWS):
-        bunker_states.append( [False] * GRID_COLUMNS )
 
     # if missile is flying
     missile_flying: bool = False
     missile_flying_location: int = 815
     missile_flying_speed: int = (SCREEN_HEIGHT - MISSILE_OFFSET) // FPS
     
-    
 
     # MAIN GAME LOOP
     running: bool = True
     last_clicked_coord: tuple = (-1, -1)
-    game_state: str = "START_SCREEN"
+    game_state: str = "SET_GAME"
     background_music.play(-1)
     while running:
-       
+        if game_state == "SET_GAME":
+            bunker_aliens = []
+            for  _ in range(GRID_ROWS):
+                bunker_aliens.append( [False] * GRID_COLUMNS )
+            bunker_number: str = ALIEN_COUNT
+            # Randomly Generates the location of the bunkers 
+            aliens_placed: int = 0
+            while aliens_placed < ALIEN_COUNT:
+                col: int = random.randint(0,GRID_ROWS - 1)
+                row: int = random.randint(0,GRID_COLUMNS - 1)
+                if not bunker_aliens[row][col]:
+                    bunker_aliens[row][col] = True
+                    aliens_placed += 1
+            print(bunker_aliens)
+
+            bunker_states = []
+            for  _ in range(GRID_ROWS):
+                bunker_states.append( [False] * GRID_COLUMNS )
+            game_state = "START_SCREEN"
+
         if game_state == "START_SCREEN":
             game_state = display_start_screen(screen,main_image)
         
@@ -179,6 +182,7 @@ async def main() -> None:
        
         elif game_state == "WIN_SCREEN":
              game_state = display_win_screen(screen,main_image)
+            
         else:
             print(f"Invalid game state: {game_state}")
             running = False
