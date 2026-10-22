@@ -44,7 +44,9 @@ def display_game_over_screen(screen: pygame.Surface, lives: list[bool],main_imag
     # process the events, if the space button was pressed, move to the next screen
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
-            return "START_SCREEN"
+            
+            return "SET_GAME"
+        
 
 
     # stay on the current screen
