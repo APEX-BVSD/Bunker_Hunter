@@ -7,7 +7,7 @@ Kaplan Tonelli
 Main background image from (https://easy-peasy.ai/ai-image-generator/images/genera-un-pixel-art-9b8a92a9-eb53-4ce5-8ae0-d74c8f95d824)
 Green alien image on main background from (https://www.vecteezy.com/vector-art/66675512-pixel-alien-emerging-from-ground-green-extraterrestrial-character-retro-game-art)
 Background music from pixabay(https://pixabay.com/music/electronic-game-game-music-508018/)
-"""
+""" 
 
 import asyncio
 import pygame
@@ -32,7 +32,7 @@ async def main() -> None:
         None
     """
     pygame.init()
-    #sounds
+    # Sounds
     owchie_sound: pygame.mixer.Sound = pygame.mixer.Sound("assets/owchie.ogg")
     explosion_sound: pygame.mixer.Sound = pygame.mixer.Sound("assets/explosion.ogg")
     background_music: pygame.mixer.Sound = pygame.mixer.Sound("assets/background_music.ogg")
@@ -41,13 +41,13 @@ async def main() -> None:
     
     background_color: tuple = (100, 255, 100)
     
-    # set the screen dimensions
+    # Set the screen dimensions
     screen: pygame.Surface = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
-    # set title
+    # Set title
     pygame.display.set_caption(GAME_TITLE)
 
-    # create clock
+    # Create clock
     clock: pygame.time.Clock = pygame.time.Clock()
     frame_counter: int = 0
 
@@ -58,12 +58,12 @@ async def main() -> None:
     main_image: pygame.Surface = pygame.image.load("assets/main-screen.png")
 
 
-    # load hearts
+    # Load hearts
     heart_gone: list[pygame.Surface] = load_sprites("Heart_gone", 12)
     heart_sprite: list[pygame.Surface] = load_sprites("Heart_Idle", 4)
     lives: list[bool] = [True, True, True]
 
-    # load more sprites
+    # Load more sprites
     dead_bunker_sprite: pygame.Surface = pygame.image.load("assets/dead_bunker_sprite.png")
     idle_missile_sprite: pygame.Surface = pygame.image.load("assets/Missile_Idle0.png")
     flying_missile_sprite: pygame.Surface = pygame.image.load("assets/missile_flying_sprite.png")
@@ -77,7 +77,7 @@ async def main() -> None:
     bunker_aliens: list[list[bool]] = []
     bunker_states: list[list[bool]] = []
 
-    # if missile is flying
+    # If missile is flying
     missile_flying: bool = False
     missile_flying_location: int = 815
     missile_flying_speed: int = (SCREEN_HEIGHT - MISSILE_OFFSET) // FPS
@@ -110,13 +110,13 @@ async def main() -> None:
             game_state = "START_SCREEN"
 
         if game_state == "START_SCREEN":
-            game_state = display_start_screen(screen,main_image)
+            game_state = display_start_screen(screen, main_image)
         
         elif game_state == "INTRO_SCREEN":
-            game_state = display_info_screen(screen,main_image)
+            game_state = display_info_screen(screen, main_image)
 
         elif game_state == "MODE_SCREEN":
-            game_state = display_mode_screen(screen,main_image)
+            game_state = display_mode_screen(screen, main_image)
 
         elif game_state == "PLAYING":
             coord: tuple = get_coordinates()
@@ -137,12 +137,12 @@ async def main() -> None:
                 missile_flying_location -= missile_flying_speed
 
             if missile_flying_location <= 0:
-                last_clicked_coord= (-1,-1)
+                last_clicked_coord = (-1, -1)
                 missile_flying = False
                 missile_flying_location = 815
 
         elif game_state == "X_QUESTION_SCREEN":
-            result: bool = display_question_screen(screen, equations_x, heart_sprite, heart_gone, frame_counter, lives, owchie_sound, explosion_sound,background_music,main_image)
+            result: bool = display_question_screen(screen, equations_x, heart_sprite, heart_gone, frame_counter, lives, owchie_sound, explosion_sound, background_music, main_image)
             if result:
                 ding_sound.play()
                 game_state = "Y_QUESTION_SCREEN"
@@ -152,9 +152,9 @@ async def main() -> None:
                 game_state = "X_QUESTION_SCREEN"
 
         elif game_state == "Y_QUESTION_SCREEN":
-            result: bool = display_question_screen(screen, equations_y, heart_sprite, heart_gone, frame_counter, lives, owchie_sound, explosion_sound,background_music,main_image)
+            result: bool = display_question_screen(screen, equations_y, heart_sprite, heart_gone, frame_counter, lives, owchie_sound, explosion_sound, background_music, main_image)
             if result:
-                #Finish implementing the bunkers
+                # Finish implementing the bunkers
                 explosion_sound.play()
                 bunker_states[row][col] == True
                 col, row = coord
@@ -164,12 +164,10 @@ async def main() -> None:
                 if bunker_states[row][col] == False:
                     bunker_states[row][col] = True
                     if bunker_aliens[row][col]:
-                        bunker_number-=1
+                        bunker_number -= 1
                 missile_flying = True
-                if bunker_number == 0 and lives >0:
+                if bunker_number == 0 and lives > 0:
                     game_state = "WIN_SCREEN"
-                    
-                    
                 game_state = "PLAYING"
 
             elif result == False:
@@ -178,11 +176,10 @@ async def main() -> None:
                 game_state = "Y_QUESTION_SCREEN"
                 
         elif game_state == "GAME_OVER":
-            game_state = display_game_over_screen(screen,lives,main_image)
+            game_state = display_game_over_screen(screen, lives, main_image)
        
         elif game_state == "WIN_SCREEN":
-             game_state = display_win_screen(screen,main_image)
-            
+             game_state = display_win_screen(screen, main_image)
         else:
             print(f"Invalid game state: {game_state}")
             running = False
@@ -192,16 +189,16 @@ async def main() -> None:
             if event.type == pygame.QUIT:
                 running = False
         
-        # render the screen
+        # Render the screen
         pygame.display.flip()
-        # advance the clock
+        # Advance the clock
         clock.tick(FPS)
         frame_counter += 1
         pygame.event.pump()
 
         await asyncio.sleep(0)
 
-    # when the loop breaks, shut down pygame gracefully
+    # When the loop breaks, shut down pygame gracefully
     pygame.quit()
 
 
