@@ -10,7 +10,7 @@ First Last
 import pygame
 from pygame import font
 
-def display_mode_screen(screen: pygame.Surface) -> str:
+def display_mode_screen(screen: pygame.Surface,main_image:pygame.Surface) -> str:
     """
     Displays the start screen text and waits for the player to press the space key.
     Returns "PLAYING" as the next game state.
@@ -24,13 +24,12 @@ def display_mode_screen(screen: pygame.Surface) -> str:
     """
     
     # draw the screen
-    image: pygame.Surface = pygame.image.load("assets/main-screen.png")
     font: pygame.font.Font = pygame.font.Font(size=48)
     bigger_font: pygame.font.Font = pygame.font.Font(size=100)
     text_box1: pygame.Surface = bigger_font.render("MODES", True, "white")
     text_box2: pygame.Surface = font.render("MODE 1 (+,-)", True, "white")
     Mode_Button:pygame.Rect= pygame.Rect(screen.get_width() // 2 - text_box2.get_width() // 2, screen.get_height() // 4, 200, 30)
-    screen.blit(image, (0, 0))
+    screen.blit(main_image, (0, 0))
     screen.blit(text_box1, (screen.get_width() // 2 - text_box1.get_width() // 2, screen.get_height() // 10))
     screen.blit(text_box2, (screen.get_width() // 2 - text_box2.get_width() // 2, screen.get_height() // 4))
     

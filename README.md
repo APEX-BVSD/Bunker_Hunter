@@ -1,13 +1,13 @@
-# Game Title
+# Bunker Hunter
 
 ## About the Game
-Briefly describe your game and what the player will learn.
+In this game you are an alien bunker hunter, whose goal is to blow up all the alien bunkers to save earth!!
 
 ## Learning Objective
-What skill or concept does your game teach or reinforce?
+The skill we are trying to teach in this game is third and 4th grade math which deals with adding and subtracting negative numbers.
 
 ## How to Play
-Explain what the player is trying to accomplish.
+To play the game first choose your mode "only 1 for now" and then you read the intro which explains all the controls and how to win.
 
 ## Controls
 - Arrow Keys:
@@ -15,11 +15,12 @@ Explain what the player is trying to accomplish.
 - Mouse:
 
 ## How to Win
-Explain how the player succeeds.
+The player wins if they destroy all 30 alien bunkers
 
 ## How to Run the Game
-Explain how to run the game.
+Load it, push the space button and select the mode.
 
 ## Team
-- Name
-- Name
+- Yoav Bierkatz
+- Kaplan Tonelli
+- Jude Averitt
