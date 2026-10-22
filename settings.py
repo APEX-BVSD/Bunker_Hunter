@@ -20,6 +20,7 @@ LOW: int = -20
 HIGH: int = 20
 ALIEN_COUNT: int = 30
 FPS: int = 60
+MISSILE_OFFSET: int = 185
 
 GAME_TITLE: str = "Bunker Hunter"
 
