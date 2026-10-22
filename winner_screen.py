@@ -42,7 +42,7 @@ def display_win_screen(screen: pygame.Surface, main_image:pygame.Surface) -> str
     # process the events, if the space button was pressed, move to the next screen
     for event in pygame.event.get():
             if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
-                return "START_SCREEN"
+                return "SET_GAME"
 
     # stay on the current screen
     return "WIN_SCREEN"
