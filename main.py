@@ -182,6 +182,11 @@ async def main() -> None:
         else:
             print(f"Invalid game state: {game_state}")
             running = False
+
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
         
         # render the screen
         pygame.display.flip()
