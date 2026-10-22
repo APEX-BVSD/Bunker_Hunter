@@ -4,6 +4,9 @@ October 2026
 Yoav Bierkatz
 Jude Averitt
 Kaplan Tonelli
+Main background image from (https://easy-peasy.ai/ai-image-generator/images/genera-un-pixel-art-9b8a92a9-eb53-4ce5-8ae0-d74c8f95d824)
+Green alien image on main background from (https://www.vecteezy.com/vector-art/66675512-pixel-alien-emerging-from-ground-green-extraterrestrial-character-retro-game-art)
+Background music from pixabay(https://pixabay.com/music/electronic-game-game-music-508018/)
 """
 
 import asyncio
@@ -17,6 +20,7 @@ from equations import *
 from problem_screen import *
 from Intro_screen import *
 from game_over_screen import *
+pygame.mixer.init()
 
 
 async def main() -> None:
@@ -26,11 +30,15 @@ async def main() -> None:
     Returns:
         None
     """
-
-
-    background_color: tuple = (100, 255, 100)
     pygame.init()
-
+    #sounds
+    owchie_sound: pygame.mixer.Sound = pygame.mixer.Sound("assets/owchie.ogg")
+    explosion_sound: pygame.mixer.Sound = pygame.mixer.Sound("assets/explosion.ogg")
+    background_music: pygame.mixer.Sound = pygame.mixer.Sound("assets/background_music.ogg")
+    background_music.set_volume(0.10)
+    
+    background_color: tuple = (100, 255, 100)
+    
     # set the screen dimensions
     screen: pygame.Surface = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
@@ -45,6 +53,7 @@ async def main() -> None:
     # Load background image for playing screen
     original_image: pygame.Surface = pygame.image.load("assets/Desert.png")
     bigger_image: pygame.Surface = pygame.transform.scale(original_image, (800, 1000))
+    main_image: pygame.Surface = pygame.image.load("assets/main-screen.png")
 
 
     # load hearts
@@ -59,6 +68,7 @@ async def main() -> None:
 
     # Load dead desert sprite
     dead_desert_sprite: pygame.Surface = pygame.image.load("assets/dead_desert_sprite.png")
+
     # bunkers
     bunker_number:str =30
     ROW_COUNT = 0
@@ -90,15 +100,17 @@ async def main() -> None:
     running: bool = True
     last_clicked_coord: tuple = (-1, -1)
     game_state: str = "START_SCREEN"
+    background_music.play(-1)
     while running:
+
         if game_state == "START_SCREEN":
-            game_state = display_start_screen(screen)
+            game_state = display_start_screen(screen,main_image)
         
         elif game_state == "INTRO_SCREEN":
-            game_state = display_info_screen(screen)
+            game_state = display_info_screen(screen,main_image)
 
         elif game_state == "MODE_SCREEN":
-            game_state = display_mode_screen(screen)
+            game_state = display_mode_screen(screen,main_image)
 
         elif game_state == "PLAYING":
             coord: tuple = get_coordinates()
@@ -124,7 +136,7 @@ async def main() -> None:
                 missile_flying_location = 815
 
         elif game_state == "X_QUESTION_SCREEN":
-            result: bool = display_question_screen(screen, equations_x, heart_sprite, heart_gone, frame_counter, lives)
+            result: bool = display_question_screen(screen, equations_x, heart_sprite, heart_gone, frame_counter, lives, owchie_sound, explosion_sound,background_music,main_image)
             if result:
                 game_state = "Y_QUESTION_SCREEN"
             elif result == False:
@@ -133,7 +145,7 @@ async def main() -> None:
                 game_state = "X_QUESTION_SCREEN"
 
         elif game_state == "Y_QUESTION_SCREEN":
-            result: bool = display_question_screen(screen, equations_y, heart_sprite, heart_gone, frame_counter, lives)
+            result: bool = display_question_screen(screen, equations_y, heart_sprite, heart_gone, frame_counter, lives, owchie_sound, explosion_sound,background_music,main_image)
             if result:
                 #Finish implementing the bunkers     
                 bunker_states[row][col] == True
@@ -141,7 +153,7 @@ async def main() -> None:
                 row -= 1
                 col -= 1
 
-                if bunker_states[row][col] == False:
+                if bunker_aliens[row][col] and bunker_states[row][col] == False:
                     bunker_states[row][col] = True
                     if bunker_aliens[row][col]:
                         bunker_number-=1
@@ -156,7 +168,7 @@ async def main() -> None:
                 game_state = "Y_QUESTION_SCREEN"
                 
         elif game_state == "GAME_OVER":
-            game_state = display_game_over_screen(screen,lives)
+            game_state = display_game_over_screen(screen,lives,main_image)
 
         else:
             print(f"Invalid game state: {game_state}")
@@ -197,3 +209,4 @@ def load_sprites(file_name: str, sprite_count: int) -> list[pygame.Surface]:
 
 
 asyncio.run(main())
+

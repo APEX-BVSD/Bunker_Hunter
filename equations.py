@@ -88,7 +88,7 @@ def make_equation(correct_answer: int, make_correct: bool = True) -> str:
     if first_number < 0:
         first_number = f"({first_number})"
 
-    if second_number <0:
+    if second_number < 0:
         second_number = f"({second_number})"
    
     return f" {first_number} {operation} {second_number} = ?"

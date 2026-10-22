@@ -23,17 +23,23 @@ def display_grid_screen(screen: pygame.Surface,background_image: pygame.surface,
     Displays the game grid screen with hearts showing remaining lives.
     
     Parameters:
-        screen: The screen to render the game on
-        background_image: The background image for the grid
-        heart_sprite: List of heart animation frames
-        heart_gone: List of empty heart sprites
-        frame_counter: Current frame count for animation
-        lives: List of booleans representing remaining lives
+        screen (pygame.Surface): The screen to render the game on
+        background_image (pygame.Surface): The background image for the grid
+        heart_sprite (list[pygame.Surface]): List of heart animation frames
+        frame_counter (int): Current frame count for animation
+        lives (list[bool]): List of booleans representing remaining lives
+        heart_gone (list[pygame.Surface]): List of empty heart sprites
+        bunker_aliens (list[list[bool]]): 2D list tracking which bunkers contain aliens
+        bunker_states (list[list[bool]]): 2D list tracking which bunkers have been destroyed
+        dead_bunker_sprite (pygame.Surface): Sprite for destroyed bunkers
+        bunker_number (str): String showing the number of remaining bunkers
+        dead_desert_sprite (pygame.Surface): Sprite for empty destroyed locations
     
     Returns:
-        The game state for the next frame
+        str: The game state for the next frame
     """
     screen.blit(background_image, (0, 0))
+    #sound
 
     # Display hearts based on remaining lives
     heart_frame: int = (frame_counter // FPS) % len(heart_sprite)
@@ -55,17 +61,16 @@ def display_grid_screen(screen: pygame.Surface,background_image: pygame.surface,
                 else:
                     screen.blit(dead_desert_sprite,(COLUMN_SIZE * col, ROW_SIZE * row))  
 
-        
-    if lives[2] == True:
+    if lives[2]:
         screen.blit(heart_sprite[heart_frame], HEART1POS2)
     else:
         screen.blit(heart_gone[-1], HEART1POS2)
         return "GAME_OVER"
-    if lives[1] == True:
+    if lives[1]:
         screen.blit(heart_sprite[heart_frame], HEART2POS2)
     else:
         screen.blit(heart_gone[-1], HEART2POS2)
-    if lives[0] == True:
+    if lives[0]:
         screen.blit(heart_sprite[heart_frame], HEART3POS2)
     else:
         screen.blit(heart_gone[-1], HEART3POS2)
@@ -80,7 +85,8 @@ def get_coordinates() -> tuple:
     Captures mouse click coordinates and converts them to grid positions.
     
     Returns:
-        A tuple containing the grid row and column coordinates or None if the mouse wasn't clicked
+        tuple: A tuple containing the grid row and column coordinates
+
     """
 
     for event in pygame.event.get():
